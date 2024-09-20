@@ -1,1 +1,1 @@
-My personal website created for IAT 355.
+My personal website created for IAT 355 Assignment 1. Tools used to create this website include GitHub, Git, VSCode, and various online websites to learn about HTML, CSS, JavaScript, and SVG.
