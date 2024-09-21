@@ -1,16 +1,14 @@
 /* Add your styling here */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
+* {
+    box-sizing: border-box;
+    color: white;
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 2rem;
-    text-align: center;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #101d3c;
+    margin: 0;
+    padding: 0;
 }
 
 main {
@@ -22,4 +20,40 @@ main {
 
 svg {
     border: solid lightgrey;
+}
+
+.introName {
+    font-style: 3rem;
+    margin-top: 0;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10rem;
+    padding: 6rem;
+}
+
+.flex-item-left {
+    padding: 10px;
+    flex: 50%;
+}
+
+.flex-item-right {
+    padding: 10px;
+    padding-right: 20px;
+    flex: 50%;
+}
+
+@media (max-width: 800px) {
+    .flex-item-right, .flex-item-left {
+    flex: 100%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .flex-item-left, .flex-item-right {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
 }
