@@ -1,11 +1,11 @@
 /* Add your styling here */
 * {
-    font-family: "Roboto", sans-serif;
-    box-sizing: border-box;
-    color: white;
+    font-family: 'Nunito', sans-serif;
+    /* box-sizing: border-box;
+    color: white; */
 }
 
-body {
+/* body {
     font-family: Arial, sans-serif;
     background-color: #101d3c;
     margin: 0;
@@ -17,13 +17,132 @@ main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+} */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
-svg {
-    border: solid lightgrey;
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 1rem;
+    background-color: #097969;
 }
 
-.introName {
+.name {
+    letter-spacing: 2px;
+    font-size: 1.25rem;
+}
+
+.name a {
+    color: #FCF8E8;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 15px 30px;
+}
+
+.name a:active, .name a:hover, .name a:focus {
+    background-color: #FFFFE0;
+    color: #097969;
+}
+
+.nav-menu {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 0rem;
+}
+
+.nav-menu li {
+    list-style: none;
+}
+
+.nav-menu a {
+    color: #FCF8E8;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: bold;
+    padding: 15px 30px;
+}
+
+.nav-menu a:active, .nav-menu a:hover, .nav-menu a:focus {
+    background-color: #FFFFE0;
+    color: #097969;
+}
+
+.about {
+    max-width: 1200px;
+    margin: auto;
+    padding: 5rem;
+}
+
+section {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.project {
+    margin-bottom: 20px;
+}
+
+.project img {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+@media (min-width: 36.5rem) {
+
+    .nav-menu {
+        flex-direction: row;
+    }
+
+    nav {
+        flex-direction: row;
+        position: fixed;
+        top: 0rem;
+        width: 100%;
+        z-index: 10;
+    }
+}
+
+/* header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav {
+    margin-top: 10px;
+    text-align: center;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+} */
+
+/* .introName {
     font-style: 3rem;
     margin-top: 0;
 }
@@ -57,4 +176,4 @@ svg {
         padding-top: 6rem;
         padding-bottom: 6rem;
     }
-}
+} */
