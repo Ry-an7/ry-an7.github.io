@@ -1,23 +1,6 @@
-/* Add your styling here */
 * {
     font-family: 'Nunito', sans-serif;
-    /* box-sizing: border-box;
-    color: white; */
 }
-
-/* body {
-    font-family: Arial, sans-serif;
-    background-color: #101d3c;
-    margin: 0;
-    padding: 0;
-}
-
-main {
-    padding: 2rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-} */
 
 body {
     margin: 0;
@@ -78,14 +61,12 @@ nav {
     color: #097969;
 }
 
-.about {
-    max-width: 1200px;
-    margin: auto;
-    padding: 5rem;
+header {
+    padding-top: 6rem;
 }
 
 section {
-    padding: 20px;
+    padding: 5rem;
     max-width: 1200px;
     margin: auto;
 }
@@ -123,57 +104,3 @@ footer {
         z-index: 10;
     }
 }
-
-/* header {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-}
-
-nav {
-    margin-top: 10px;
-    text-align: center;
-}
-
-nav a {
-    margin: 0 15px;
-    text-decoration: none;
-    color: #333;
-} */
-
-/* .introName {
-    font-style: 3rem;
-    margin-top: 0;
-}
-
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 10rem;
-    padding: 6rem;
-}
-
-.flex-item-left {
-    padding: 10px;
-    flex: 50%;
-}
-
-.flex-item-right {
-    padding: 10px;
-    padding-right: 20px;
-    flex: 50%;
-}
-
-@media (max-width: 600px) {
-    .flex-item-right, .flex-item-left {
-    flex: 100%;
-    }
-}
-
-@media (min-width: 1024px) {
-    .flex-item-left, .flex-item-right {
-        padding-top: 6rem;
-        padding-bottom: 6rem;
-    }
-} */
