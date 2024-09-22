@@ -46,7 +46,7 @@ svg {
     flex: 50%;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
     .flex-item-right, .flex-item-left {
     flex: 100%;
     }
