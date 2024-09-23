@@ -5,3 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Hello, welcome to my personal website!');
     });
 });
+
+
+document.getElementById("musicBar").addEventListener("click", displayMusic);
+
+
+
+function displayMusic() {
+    alert('4 hours and 30 minutes');
+}
