@@ -12,6 +12,10 @@ p {
     font-size: 1.25rem;
 }
 
+h3 {
+    font-size: 1.35rem;
+}
+
 nav {
     display: flex;
     flex-wrap: wrap;
@@ -99,6 +103,7 @@ section {
     border-radius: 0.313rem;
     display: flex;
     align-items: center;
+    font-size:1.1rem;
 }
 
 ul li img {
