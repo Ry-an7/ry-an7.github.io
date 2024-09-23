@@ -8,6 +8,10 @@ body {
     background-color: #f4f4f4;
 }
 
+p {
+    font-size: 20px;
+}
+
 nav {
     display: flex;
     flex-wrap: wrap;
@@ -103,6 +107,10 @@ ul li img {
     margin-right: 10px;
 }
 
+#protopie {
+    width: 55px;
+}
+
 .project {
     margin-bottom: 20px;
 }
@@ -134,5 +142,12 @@ footer {
         top: 0rem;
         width: 100%;
         z-index: 10;
+    }
+}
+
+@media (max-width: 53.125rem) {
+
+    .skills {
+        
     }
 }
