@@ -1,2 +1,2 @@
 My personal portfolio website created for IAT 355 Assignment 1. Tools used to create this website include GitHub, Git, VSCode, and various online websites to learn about HTML, CSS, JavaScript, and SVG.
-This website contains two pages one that introduces myself with personal information and more information about me, the second page contains two visulizations created using SVG.
+This website contains two pages with the main page being a portfolio of myself and the second page being two visulizations that have been created using SVG.
