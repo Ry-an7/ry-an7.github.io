@@ -28,13 +28,13 @@ function displayHomework() {
 const svg = document.getElementById('leWittArt');
 
 // Define the length of each line in pixels (10 inches = 960 pixels)
-    const lineLength = 60;
+    const lineLength = 100;
 
 // Number of lines to generate (10,000)
     const lineCount = 2000;
 
 // Create line function that appends a line to the SVG
-function createLine(x1, y1, x2, y2, stroke = 'black', strokeWidth = 0.5) {
+function createLine(x1, y1, x2, y2, stroke = 'grey', strokeWidth = 0.5) {
 
     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     

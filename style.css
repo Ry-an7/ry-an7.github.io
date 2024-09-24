@@ -88,13 +88,8 @@ section {
 
 .about-info {
     width: 48%;
-    
     padding-top: 10rem;
 }
-
-
-
-
 
 .skills {
     display: flex;
@@ -144,8 +139,8 @@ ul li img {
 #leWittArt {
     background-color: white;
     border: 1px solid #ccc;
-    width: 100vw;
-    height: 100vh;
+    width: 510px;
+    height: 1000px;
 }
 
 footer {
