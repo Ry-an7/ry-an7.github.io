@@ -80,6 +80,22 @@ section {
     margin: auto;
 }
 
+#about {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.about-info {
+    width: 48%;
+    
+    padding-top: 10rem;
+}
+
+
+
+
+
 .skills {
     display: flex;
     flex-wrap: wrap;
