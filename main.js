@@ -7,10 +7,3 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-document.getElementById("musicBar").addEventListener("click", displayMusic);
-
-
-
-function displayMusic() {
-    alert('4 hours and 30 minutes');
-}
