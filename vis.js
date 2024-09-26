@@ -27,6 +27,28 @@ function displayHomework() {
 // Get the SVG element
 const svg = document.getElementById('leWittArt');
 
+//used https://www.petercollingridge.co.uk/tutorials/svg/interactive/javascript/ to help learn to do this javascript part
+
+svg.addEventListener("click", function(event) {
+    // Get the point where the click occurred relative to the SVG
+    const point = svg.createSVGPoint();
+    point.x = event.clientX;
+    point.y = event.clientY;
+    
+    // Transform the coordinates to SVG space
+    const svgCoords = point.matrixTransform(svg.getScreenCTM().inverse());
+    
+    // Create a new circle at the click position
+    const newCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    newCircle.setAttribute("cx", svgCoords.x);
+    newCircle.setAttribute("cy", svgCoords.y);
+    newCircle.setAttribute("r", 20); // Radius of the circle
+    newCircle.setAttribute("fill", "green");
+    
+    // Append the new circle to the SVG element
+    svg.appendChild(newCircle);
+});
+
 // Define the length of each line in pixels (10 inches = 960 pixels)
     const lineLength = 100;
 
@@ -49,9 +71,6 @@ function createLine(x1, y1, x2, y2, stroke = 'grey', strokeWidth = 0.5) {
   // Append line to SVG
     return line
 }
-
-// let line = createLine(10,10,40,40, "red",1)
-// svg.append(line)
 
 // Function to generate random coordinates within the SVG canvas
 function getRandomPosition(width, height, padding = 100) {
