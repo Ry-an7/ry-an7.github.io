@@ -24,6 +24,11 @@ function displayHomework() {
     alert('6 hours and 30 minutes spend doing homework.');
 }
 
+function randomColour() {
+    var colour ='#' + (Math.random().toString(16) + "000000").substring(2,8);
+    return colour;
+}
+
 // Get the SVG element
 const svg = document.getElementById('leWittArt');
 
@@ -42,10 +47,10 @@ svg.addEventListener("click", function(event) {
     const newCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     newCircle.setAttribute("cx", svgCoords.x);
     newCircle.setAttribute("cy", svgCoords.y);
-    newCircle.setAttribute("r", 20); // Radius of the circle
-    newCircle.setAttribute("fill", "green");
+    newCircle.setAttribute("r", 20);
+    newCircle.setAttribute("fill", randomColour());
     
-    // Append the new circle to the SVG element
+    
     svg.appendChild(newCircle);
 });
 
