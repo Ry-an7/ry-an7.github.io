@@ -75,7 +75,7 @@ header {
 }
 
 section {
-    padding: 5rem 5rem 0rem;
+    padding: 5rem 5rem 3rem;
     max-width: 75rem;
     margin: auto;
 }
@@ -139,8 +139,11 @@ ul li img {
 #leWittArt {
     background-color: white;
     border: 1px solid #ccc;
-    width: 1200px;
-    height: 1000px;
+    width: 500px;
+    height: 700px;
+    
+    /* width: 1200px;
+    height: 1000px; */
 }
 
 .skill:hover {

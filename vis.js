@@ -31,24 +31,37 @@ function randomColour() {
 
 // Get the SVG element
 const svg = document.getElementById('leWittArt');
+const triangle = document.getElementById("triangle");
+
+svg.addEventListener("mousemove", (event) => {
+const svgRect = svg.getBoundingClientRect();
+const mouseX = event.clientX - svgRect.left;
+const mouseY = event.clientY - svgRect.top;
+
+// Adjust the X and Y value of the top point (triangle's tip) based on mouse position
+const newPoints = `250,200 ${mouseX},${mouseY} 250,225`;
+
+triangle.setAttribute("points", newPoints);
+});
+
 
 //used https://stackoverflow.com/questions/48343436/how-to-convert-svg-element-coordinates-to-screen-coordinates to help learn to do this javascript part
 
-svg.addEventListener("click", function(event) {
-    const point = svg.createSVGPoint();
-    point.x = event.clientX;
-    point.y = event.clientY;
+// svg.addEventListener("click", function(event) {
+//     const point = svg.createSVGPoint();
+//     point.x = event.clientX;
+//     point.y = event.clientY;
     
-    // Transform the coordinates to SVG space
-    const svgCoords = point.matrixTransform(svg.getScreenCTM().inverse());
+//     // Transform the coordinates to SVG space
+//     const svgCoords = point.matrixTransform(svg.getScreenCTM().inverse());
     
-    // Create a new circle at the click position
-    const newCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    newCircle.setAttribute("cx", svgCoords.x);
-    newCircle.setAttribute("cy", svgCoords.y);
-    newCircle.setAttribute("r", 20);
-    newCircle.setAttribute("fill", randomColour());
+//     // Create a new circle at the click position
+//     const newCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+//     newCircle.setAttribute("cx", svgCoords.x);
+//     newCircle.setAttribute("cy", svgCoords.y);
+//     newCircle.setAttribute("r", 20);
+//     newCircle.setAttribute("fill", randomColour());
     
     
-    svg.appendChild(newCircle);
-});
+//     svg.appendChild(newCircle);
+// });
