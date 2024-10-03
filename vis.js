@@ -58,7 +58,7 @@ async function renderBar() {
         vl.color().fieldN("genre").title("Genre").scale({scheme : "category20"}) 
     )
 
-    .width(700)
+    .width(1000)
     .height(600)
     .toSpec();
 
