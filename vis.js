@@ -53,13 +53,9 @@ async function renderBar() {
     .markBar()
     .data(data)
     .encode(
-        vl.x().fieldN("platform")
-            .title("Platform"),
-        vl.y().fieldQ("global_sales").aggregate("sum")
-            .title("Global Sales"),
-        vl.color().fieldN("genre")
-            .title("Genre")
-            .scale({scheme : "category20"}) 
+        vl.x().fieldN("platform").title("Platform"),
+        vl.y().fieldQ("global_sales").aggregate("sum").title("Global Sales (in millions of units)"),
+        vl.color().fieldN("genre").title("Genre").scale({scheme : "category20"}) 
     )
 
     .width(700)
@@ -72,36 +68,102 @@ async function renderBar() {
     });
 }
 
-//Question 2
-async function renderLine() {
+//Question 2 Genre
+async function renderLineG() {
     const data = await d3.csv("./datasets/videogames_long.csv");
 
     const vlSpec = vl
     .markLine()
     .data(data)
     .encode(
-        vl.x().fieldN("year")
-            .title(null),
-        vl.y().fieldQ("global_sales").aggregate("sum")
-            .title("Global Sales"),
-        vl.color().fieldN("platform")
-            .scale({scheme: "viridis"}),
-        vl.facet(vl.fieldN("genre"), {columns: 3})
-    )
-
-    .width(550)
-    .height(550)
-    .resolve({ axis: {x: {scale : "independent"}, y: {scale : "independent"}}})
+        vl.x().fieldN("year").title(null),
+        vl.y().fieldQ("global_sales").aggregate("sum").title("Global Sales (in millions of units)"),
+        vl.color().fieldN("genre").title("Genre").scale({scheme : "category20"})
+)
+    .width(1000)
+    .height(600)
     .toSpec();
 
-    vegaEmbed("#viewQ2", vlSpec).then((result) => {
+    vegaEmbed("#viewQ2G", vlSpec).then((result) => {
         const view = result.view;
         view.run();
     });
 }
 
+//Question 2 Platform
+async function renderLineP() {
+    const data = await d3.csv("./datasets/videogames_long.csv");
+
+    const vlSpec = vl
+    .markLine()
+    .data(data)
+    .encode(
+        vl.x().fieldN("year").title(null),
+        vl.y().fieldQ("global_sales").aggregate("sum").title("Global Sales (in millions of units)"),
+        vl.color().fieldN("platform").title("Platform").scale({ range: [
+            "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
+            "#8c564b", "#e377c2", "#bcbd22", "#17becf", "#393b79",
+            "#637939", "#e6550d", "#fdae6b", "#d6616b", "#756bb1",
+            "#9c9ede", "#e7ba52", "#843c39", "#7b4173", "#1f78b4",
+            "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#cab2d6",
+            "#6a3d9a", "#b15928", "#ff9896", "#5c4d7d", "#a55194"
+        ]}) 
+)
+    .width(1000)
+    .height(600)
+    .toSpec();
+
+    vegaEmbed("#viewQ2P", vlSpec).then((result) => {
+        const view = result.view;
+        view.run();
+    });
+}
+
+//Question 3
+async function renderBarRS() {
+    const data = await d3.csv("./datasets/videogames_long.csv");
+
+    const vlSpec = vl
+    .markBar().width({step: 6.5})
+    .data(data)
+    .encode(
+        vl.x().fieldN("platform").title("Platform"),
+        vl.y().fieldQ("sales_amount").aggregate("sum").title("Sales Amount (in millions of units)"),
+        vl.xOffset().field("sales_region"),
+        vl.color().field("sales_region").title("Region")
+)
+    .height(500)
+    .toSpec();
+
+    vegaEmbed("#viewQ3", vlSpec).then((result) => {
+        const view = result.view;
+        view.run();
+    });
+}
+
+//Question 4
+// async function renderBarRS() {
+//     const data = await d3.csv("./datasets/videogames_long.csv");
+
+//     const vlSpec = vl
+//     .markLine()
+//     .data(data)
+//     .encode(
+        
+// )
+//     .height(500)
+//     .toSpec();
+
+//     vegaEmbed("#viewQ4", vlSpec).then((result) => {
+//         const view = result.view;
+//         view.run();
+//     });
+// }
+
 renderBar();
-renderLine();
+renderLineG();
+renderLineP();
+renderBarRS();
 
 //used https://stackoverflow.com/questions/48343436/how-to-convert-svg-element-coordinates-to-screen-coordinates to help learn to do this javascript part
 

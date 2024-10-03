@@ -165,12 +165,29 @@ ul li img {
     max-width: 800px;
 }
 
-#viewQ2 {
+#viewQ2G {
     width: 100%;
     height: 100%;
     max-width: 800px;
 }
 
+#viewQ2P {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+}
+
+#viewQ3 {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+}
+
+#viewQ4 {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+}
 
 footer {
     background-color: #333;
