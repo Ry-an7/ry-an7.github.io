@@ -1,2 +1,4 @@
 My personal portfolio website created for IAT 355 Assignment 1. Tools used to create this website include GitHub, Git, VSCode, and various online websites to learn about HTML, CSS, JavaScript, and SVG.
 This website contains two pages with the main page being a portfolio of myself with my skills listed and two projects that I have done in the past. The second page has two visualizations that I have created, a bar chart created using SVG which shows how many hours a day that I do specific things like listen to music or do homework and an interactive snowman where you can change the length and position of it's nose by moving your mouse around in the SVG canvas. 
+
+Added October 3, 2024: Four visulisations created for Assignment 3

@@ -151,6 +151,27 @@ ul li img {
     transition: 0.3s;
 }
 
+.vlContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+#viewQ1 {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+}
+
+#viewQ2 {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+}
+
+
 footer {
     background-color: #333;
     color: white;

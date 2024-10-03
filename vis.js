@@ -7,7 +7,6 @@ document.getElementById("gameBar").addEventListener("click", displayGame);
 document.getElementById("homeworkBar").addEventListener("click", displayHomework);
 
 
-
 function displayMusic() {
     alert('4 hours and 30 minutes spent listening to music.');
 }
@@ -44,6 +43,65 @@ const newPoints = `250,200 ${mouseX},${mouseY} 250,225`;
 triangle.setAttribute("points", newPoints);
 });
 
+// Assignment 3 Visulizations
+
+//Question 1
+async function renderBar() {
+    const data = await d3.csv("./datasets/videogames_long.csv");
+
+    const vlSpec = vl
+    .markBar()
+    .data(data)
+    .encode(
+        vl.x().fieldN("platform")
+            .title("Platform"),
+        vl.y().fieldQ("global_sales").aggregate("sum")
+            .title("Global Sales"),
+        vl.color().fieldN("genre")
+            .title("Genre")
+            .scale({scheme : "category20"}) 
+    )
+
+    .width(700)
+    .height(600)
+    .toSpec();
+
+    vegaEmbed("#viewQ1", vlSpec).then((result) => {
+        const view = result.view;
+        view.run();
+    });
+}
+
+//Question 2
+async function renderLine() {
+    const data = await d3.csv("./datasets/videogames_long.csv");
+
+    const vlSpec = vl
+    .markLine()
+    .data(data)
+    .encode(
+        vl.x().fieldN("year")
+            .title(null),
+        vl.y().fieldQ("global_sales").aggregate("sum")
+            .title("Global Sales"),
+        vl.color().fieldN("platform")
+            .scale({scheme: "viridis"}),
+        vl.facet(vl.fieldN("genre"), {columns: 3})
+    )
+
+    .width(550)
+    .height(550)
+    .resolve({ axis: {x: {scale : "independent"}, y: {scale : "independent"}}})
+    .toSpec();
+
+    vegaEmbed("#viewQ2", vlSpec).then((result) => {
+        const view = result.view;
+        view.run();
+    });
+}
+
+renderBar();
+renderLine();
 
 //used https://stackoverflow.com/questions/48343436/how-to-convert-svg-element-coordinates-to-screen-coordinates to help learn to do this javascript part
 
