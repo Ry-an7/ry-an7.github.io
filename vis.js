@@ -55,7 +55,8 @@ async function renderBar() {
     .encode(
         vl.x().fieldN("platform").title("Platform"),
         vl.y().fieldQ("global_sales").aggregate("sum").title("Global Sales (in millions of units)"),
-        vl.color().fieldN("genre").title("Genre").scale({scheme : "category20"}) 
+        vl.color().fieldN("genre").title("Genre").scale({scheme : "category20"}),
+        vl.tooltip().fieldQ("global_sales").aggregate("sum")
     )
 
     .width(1000)
@@ -130,7 +131,8 @@ async function renderBarRS() {
         vl.x().fieldN("platform").title("Platform"),
         vl.y().fieldQ("sales_amount").aggregate("sum").title("Sales Amount (in millions of units)"),
         vl.xOffset().field("sales_region"),
-        vl.color().field("sales_region").title("Region")
+        vl.color().field("sales_region").title("Region"),
+        vl.tooltip().fieldQ("sales_amount").aggregate("sum")
 )
     .height(500)
     .toSpec();
