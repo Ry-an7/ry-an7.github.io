@@ -144,28 +144,33 @@ async function renderBarRS() {
 }
 
 //Question 4
-// async function renderBarRS() {
-//     const data = await d3.csv("./datasets/videogames_long.csv");
+async function renderArc() {
+    const data = await d3.csv("./datasets/videogames_long.csv");
+    const Xbox = data.filter((item)=>{return item.platform === "X360"});
 
-//     const vlSpec = vl
-//     .markLine()
-//     .data(data)
-//     .encode(
-        
-// )
-//     .height(500)
-//     .toSpec();
+    const vlSpec = vl
+    .markArc()
+    .data(Xbox)
+    .encode(
+        vl.theta().fieldQ("genre").aggregate("count"),
+        vl.color().fieldN("genre").scale({scheme : "category20"}), 
+        vl.tooltip().fieldN("genre").aggregate("count")
+)
+    .height(500)
+    .width(1000)
+    .toSpec();
 
-//     vegaEmbed("#viewQ4", vlSpec).then((result) => {
-//         const view = result.view;
-//         view.run();
-//     });
-// }
+    vegaEmbed("#viewQ4", vlSpec).then((result) => {
+        const view = result.view;
+        view.run();
+    });
+}
 
 renderBar();
 renderLineG();
 renderLineP();
 renderBarRS();
+renderArc();
 
 //used https://stackoverflow.com/questions/48343436/how-to-convert-svg-element-coordinates-to-screen-coordinates to help learn to do this javascript part
 
