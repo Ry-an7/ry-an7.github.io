@@ -57,7 +57,14 @@ async function renderLineP() {
     .encode(
         vl.x().fieldN("year").title("Year"),
         vl.y().fieldQ("global_sales").aggregate("sum").stack("center").title("Total Sales"),
-        vl.color().fieldN("platform").title("Platform").scale({scheme: "category20c"}),
+        vl.color().fieldN("platform").title("Platform").scale({ range: [
+            "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
+            "#8c564b", "#e377c2", "#bcbd22", "#17becf", "#393b79",
+            "#637939", "#e6550d", "#fdae6b", "#d6616b", "#756bb1",
+            "#9c9ede", "#e7ba52", "#843c39", "#7b4173", "#1f78b4",
+            "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#cab2d6",
+            "#6a3d9a", "#b15928", "#ff9896", "#5c4d7d", "#a55194"
+        ]}),
         vl.tooltip().fieldN('platform')
     )
     .width(1000)
