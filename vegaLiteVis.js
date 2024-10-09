@@ -104,8 +104,10 @@ async function renderArc() {
     .encode(
         vl.theta().fieldQ("genre").aggregate("count"),
         vl.color().fieldN("genre").scale({scheme : "category20"}), 
+        vl.opacity().if(vl.selectSingle('genre_selection').fields(['genre']).bind('legend'), vl.value(1)).value(0.2),
         vl.tooltip().fieldN("genre").aggregate("count")
 )
+    .select(vl.selectSingle('genre_selection').fields(['genre']).bind('legend'))
     .height(500)
     .width(1000)
     .toSpec();
