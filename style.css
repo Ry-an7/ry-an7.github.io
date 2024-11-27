@@ -107,3 +107,16 @@ body {
     color: #333;
     width: 80%;
 }
+
+figure img {
+    display: block;
+    margin: 0 auto;
+}
+
+figcaption {
+    font-size: 1.1rem;
+    color: #555;
+    margin-top: 10px;
+    padding-left: 7rem;
+    font-style: italic;
+}
