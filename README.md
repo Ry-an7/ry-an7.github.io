@@ -1,62 +1,34 @@
-# **Personal Portfolie Website**
+# **FInal Project Website**
 
 ## **Project Overview**
-This project is a personal website created as part of **Assignment 2** for IAT 355. The main objective of the website is to showcase my skills, education, and experience in a professional manner, similar to an online portfolio. The website includes multiple pages, including a home page and multiple visualizations pages, each built using **HTML**, **CSS**, and **JavaScript**.
+This project is a website created as part of the **Final Project** for IAT 355. The main objective of the website is to tell a story about the NHL's Dead Puck Era using visulizations. The website is one page, but has interactivity that work with scrolling, all built using **HTML**, **CSS**, **JavaScript**, and **D3**.
 
 ## **Purpose**
-The website serves as a digital portfolio, highlighting my background, technical expertise, and visualization projects. It provides a clean, well-structured online presence, aimed at demonstrating the ability to build and design websites using front-end web development technologies.
+The primary goal of this project is to analyze how scoring in the NHL changed during the Dead Puck Era (1995-2004). We will examine trends in goals per game, explore the effects of the introduction of the salary cap, and highlight key shifts in offensive strategies during this time. The visualizations will make it easier to understand how these changes have shaped the game of hockey.
 
 ## **Technologies Used**
 - **HTML5:** For the structure and content of the website.
 - **CSS3:** For styling the website and ensuring it has a professional appearance.
-- **JavaScript (ES6):** For adding interactivity to the website and handling form validation and SVG visualizations.
-- **SVG (Scalable Vector Graphics):** Used to create a custom visual artwork and a recreated version of a visualization covered in class.
-- **Vega-Lite API:** Used to create visulizations from data from a video game dataset.
-
+- **JavaScript (ES6):** For adding interactivity to the website.
+- **D3.js:** For creating data-driven visualizations.
 
 ## **Project Structure**
 The website consists of the following key files:
 
-- **`index.html`:** This is the homepage of the website. It includes:
+- **`index.html`:** This is the main page of the website. It includes:
   - A personal introduction, where I highlight my education, skills, and experience.
   - Sections for my professional experience, technical skills, and interests.
   - Links to contact information and my GitHub profile.
   
-- **`visualizations.html`:** A dedicated page to showcase visualizations. It contains:
-  - An SVG version of a visualization created in class.
-  - A creative custom SVG drawing I designed using code.
+- **`vis.js`:** Contains JavaScript code for rendering and interacting with d3 graphics.
 
-  - **`vegaLiteVis.html`:** A dedicated page to showcase visualizations created for Assignment 4 It contains:
-  - 4 different visulizations created using Vega-Lite and data from a video game dataset.
-  
 - **`style.css`:** This file handles the layout and visual design of the website. It ensures that the content is presented in a clean and user-friendly way.
-
-- **`main.js`:** This JavaScript file includes interactivity features like form validation and dynamic elements for the homepage.
-
-- **`vis.js`:** Contains JavaScript code for rendering and interacting with SVG graphics on the visualizations page.
-
-- **`vegaLiteVis.js`:** Contains JavaScript code for rendering and interacting with Vega-Lite graphics on the vegaLiteVis page.
 
 - **`README.md`:** This file (you're reading it!) explains the purpose of the website, the technologies used, and how to navigate the project.
 
 ## **How to Navigate the Website**
-1. **Homepage (`index.html`):**
-   - Navigate to the homepage to learn more about me. The homepage includes links to my educational background, professional experience, and contact details.
-   - There are sections for skills, work experience, and links to other relevant resources like my GitHub page.
-
-2. **Visualizations Page (`visualizations.html`):**
-   - This page features two main visualizations:
-     1. An SVG version of the visualization created during class.
-     2. A custom SVG artwork created for this assignment.
-   - JavaScript-driven interactivity is embedded in the page to allow you to explore these visualizations.
-
-3. **Vega-Lite Visualizations Page (`vegaLiteVis.html`):**
-   - This page features four visualizations created using Vega-Lite in Observable and translated over to HTML and JavaScript for **Assignment 3**:
-     1. A stacked bar graph visualizing Global Sales by Genre and Platform. 
-     2. A stacked area chart visualizing Sales Over Time by Genre.
-     3. A stream graph visualizing Sales Over Time by Platform
-     4. A grouped bar chart visualizing Regional Sales vs. Platform.
-     5. A pie chart visualizing Game Genres Released on the Xbox 360.
+1. **Main Page (`index.html`):**
+   - Navigate by scrolling up or down the page. The page will respond to what position you have scrolled to.
 
 ## **Installation and Deployment**
 1. **Clone the Repository:**
