@@ -51,7 +51,7 @@ body {
     max-width: 80%;
 }
 
-.vis {
+.visH {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -60,19 +60,19 @@ body {
     max-width: 80%;
 }
 
-.vis .text {
+.visH .text {
     flex: 1;
     padding: 20px;
     font-size: 1.2rem;
     color: black;
 }
 
-.vis .image {
+.visH .image {
     flex: 1;
     text-align: center;
 }
 
-.vis .image img {
+.visH .image img {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
