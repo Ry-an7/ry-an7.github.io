@@ -8,59 +8,102 @@ async function drawVis1() {
     width = 800 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-        const svg = d3.select("#vis1")
-            .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
+    const svg = d3.select("#vis1")
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        d3.csv("datasets/LeagueTotals.csv").then(data => {
-            
-        const cleanedData = data
-            .filter(d => d["Season"] && d["Average Goals Per Game"]) 
-            .map(d => ({
-                Season: +d["Season"].split('-')[0], 
-                AverageGoalsPerGame: +d["Average Goals Per Game"]
-            }))
-            .sort((a, b) => a.Season - b.Season);
-            console.log(cleanedData);
-        
-        const x = d3.scaleLinear()
-            .domain(d3.extent(cleanedData, d => d.Season))
-            .range([0, width]);
+    const data = await d3.csv("datasets/LeagueTotals.csv");
 
-        const y = d3.scaleLinear()
-            .domain([0, d3.max(cleanedData, d => d.AverageGoalsPerGame)])
-            .range([height, 0]);
+    const cleanedData = data
+        .filter(d => d["Season"] && d["Average Goals Per Game"]) 
+        .map(d => ({
+            Season: +d["Season"].split('-')[0], 
+            AverageGoalsPerGame: +d["Average Goals Per Game"]
+        }))
+        .sort((a, b) => a.Season - b.Season);
+    console.log(cleanedData);
 
-        svg.append("g")
-            .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(x).tickFormat(d3.format("d")))
-            .append("text")
-            .attr("x", width / 2)
-            .attr("y", 40)
-            .attr("fill", "black")
-            .style("font-size", "14px")
-            .style("text-anchor", "middle")
-            .text("Season");
+    const x = d3.scaleLinear()
+        .domain(d3.extent(cleanedData, d => d.Season))
+        .range([0, width]);
 
-        svg.append("g")
-            .call(d3.axisLeft(y))
-            .append("text")
-            .attr("x", -height / 2)
-            .attr("y", -50)
-            .attr("transform", "rotate(-90)")
-            .attr("fill", "black")
-            .style("font-size", "14px")
-            .style("text-anchor", "middle")
-            .text("Average Goals Per Game");
+    const y = d3.scaleLinear()
+        .domain([0, d3.max(cleanedData, d => d.AverageGoalsPerGame)])
+        .range([height, 0]);
 
-        const line = d3.line()
-            .x(d => x(d.Season))
-            .y(d => y(d.AverageGoalsPerGame));
+    svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")))
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", 40)
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Season");
 
-        svg.append("path")
-            .datum(cleanedData)
-            .attr("class", "line")
-            .attr("d", line);
+    svg.append("g")
+        .call(d3.axisLeft(y))
+        .append("text")
+        .attr("x", -height / 2)
+        .attr("y", -50)
+        .attr("transform", "rotate(-90)")
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Average Goals Per Game");
+
+    const line = d3.line()
+        .x(d => x(d.Season))
+        .y(d => y(d.AverageGoalsPerGame));
+
+    svg.append("path")
+        .datum(cleanedData)
+        .attr("class", "line")
+        .attr("d", line);
+
+    // Tooltip functionality
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "rgba(0, 0, 0, 0.7)")
+        .style("color", "white")
+        .style("padding", "5px")
+        .style("border-radius", "4px");
+
+    // Tooltips interaction
+    const rects = svg.append("g")
+        .attr("fill", "none")
+        .attr("pointer-events", "all");
+
+    const dot = svg.append("circle")
+        .attr("r", 5)
+        .attr("fill", "black")
+        .style("visibility", "hidden");
+
+    d3.pairs(cleanedData, (a, b) => {
+        rects.append("rect")
+            .attr("x", x(a.Season))
+            .attr("height", height)
+            .attr("width", x(b.Season) - x(a.Season))
+            .on("mouseover", function(event) {
+                
+                tooltip.style("visibility", "visible")
+                    .text(`Season: ${a.Season}, Avg Goals: ${a.AverageGoalsPerGame}`);
+
+                dot.attr("cx", x(a.Season))
+                    .attr("cy", y(a.AverageGoalsPerGame))
+                    .style("visibility", "visible");
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("top", (event.pageY + 5) + "px")
+                    .style("left", (event.pageX + 5) + "px");
+            })
+            .on("mouseout", function() {
+                tooltip.style("visibility", "hidden");
+                dot.style("visibility", "hidden");
+            });
     });
 }
 
