@@ -128,8 +128,6 @@ async function drawVis1() {
     });
 }
 
-
-
 async function drawVis2() {
 
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
@@ -236,7 +234,6 @@ async function drawVis2() {
     });
 }
 
-
 async function drawVis3() {
 
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
@@ -327,7 +324,7 @@ async function drawVis3() {
             .on("mouseover", function(event) {
                 tooltip.style("visibility", "visible")
                     .text(`Season: ${d.Season}, Avg Goals: ${d.AverageGoalsPerGame}`);
-                    
+
                 dot.attr("cx", x(d.Season) + x.bandwidth() / 2)
                     .attr("cy", y(d.AverageGoalsPerGame))
                     .style("visibility", "visible");
@@ -343,196 +340,325 @@ async function drawVis3() {
     });
 }
 
-
-
 async function drawVis4() {
 
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
-    width = 800 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+        width = 800 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
 
-        const svg = d3.select("#vis2-1")
-            .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
+    const svg = d3.select("#vis2-1")
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        d3.csv("datasets/LeagueTotals.csv").then(data => {
-            
-        const cleanedData = data
-            .filter(d => d["Season"] && d["Season Goals"]) 
-            .map(d => ({
-                Season: +d["Season"].split('-')[0], 
-                SeasonGoals: +d["Season Goals"]
-            }))
-            
-            .sort((a, b) => a.Season - b.Season);
-            console.log(cleanedData);
-        
-        const x = d3.scaleLinear()
-            .domain(d3.extent(cleanedData, d => d.Season))
-            .range([0, width]);
+    const data = await d3.csv("datasets/LeagueTotals.csv");
 
-        const y = d3.scaleLinear()
-            .domain([0, d3.max(cleanedData, d => d.SeasonGoals)])
-            .range([height, 0]);
+    const cleanedData = data
+        .filter(d => d["Season"] && d["Season Goals"]) 
+        .map(d => ({
+            Season: d["Season"],
+            Year: +d["Season"].split('-')[0],
+            SeasonGoals: +d["Season Goals"]
+        }))
+        .sort((a, b) => a.Year - b.Year);
 
-        svg.append("g")
-            .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(x).tickFormat(d3.format("d")))
-            .append("text")
-            .attr("x", width / 2)
-            .attr("y", 40)
-            .attr("fill", "black")
-            .style("font-size", "14px")
-            .style("text-anchor", "middle")
-            .text("Season");
+    console.log(cleanedData);
 
-        svg.append("g")
-            .call(d3.axisLeft(y))
-            .append("text")
-            .attr("x", -height / 2)
-            .attr("y", -50)
-            .attr("transform", "rotate(-90)")
-            .attr("fill", "black")
-            .style("font-size", "14px")
-            .style("text-anchor", "middle")
-            .text("Goals per Season");
+    const x = d3.scaleLinear()
+        .domain(d3.extent(cleanedData, d => d.Year))
+        .range([0, width]);
 
-        const line = d3.line()
-            .x(d => x(d.Season))
-            .y(d => y(d.SeasonGoals));
+    const y = d3.scaleLinear()
+        .domain([0, d3.max(cleanedData, d => d.SeasonGoals)])
+        .range([height, 0]);
 
-        svg.append("path")
-            .datum(cleanedData)
-            .attr("class", "line")
-            .attr("d", line);
+    svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")))
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", 40)
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Season");
+
+    svg.append("g")
+        .call(d3.axisLeft(y))
+        .append("text")
+        .attr("x", -height / 2)
+        .attr("y", -50)
+        .attr("transform", "rotate(-90)")
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Goals per Season");
+
+    const line = d3.line()
+        .x(d => x(d.Year))
+        .y(d => y(d.SeasonGoals));
+
+    svg.append("path")
+        .datum(cleanedData)
+        .attr("class", "line")
+        .attr("d", line);
+
+    // Tooltip
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "rgba(0, 0, 0, 0.7)")
+        .style("color", "white")
+        .style("padding", "5px")
+        .style("border-radius", "4px");
+
+    const dot = svg.append("circle")
+        .attr("r", 5)
+        .attr("fill", "black")
+        .style("visibility", "hidden");
+
+    const rects = svg.append("g")
+        .attr("fill", "none")
+        .attr("pointer-events", "all");
+
+    cleanedData.forEach(d => {
+        rects.append("rect")
+            .attr("x", x(d.Year))
+            .attr("height", height)
+            .attr("width", 5)
+            .on("mouseover", function(event) {
+                tooltip.style("visibility", "visible")
+                    .text(`Season: ${d.Season}, Goals: ${d.SeasonGoals}`);
+                dot.attr("cx", x(d.Year))
+                    .attr("cy", y(d.SeasonGoals))
+                    .style("visibility", "visible");
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("top", (event.pageY + 5) + "px")
+                    .style("left", (event.pageX + 5) + "px");
+            })
+            .on("mouseout", function() {
+                tooltip.style("visibility", "hidden");
+                dot.style("visibility", "hidden");
+            });
     });
 }
 
 async function drawVis5() {
 
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
-    width = 800 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+        width = 800 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
 
-        const svg = d3.select("#vis2-2")
-            .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
+    const svg = d3.select("#vis2-2")
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        d3.csv("datasets/LeagueTotals.csv").then(data => {
-            
-        const cleanedData = data
-            .filter(d => d["Season"] && d["Season Goals"]) 
-            .map(d => ({
-                Season: +d["Season"].split('-')[0], 
-                SeasonGoals: +d["Season Goals"]
-            }))
-            .filter(d => d.Season >= 1990 && d.Season <= 2023)
-            .sort((a, b) => a.Season - b.Season);
-            console.log(cleanedData);
-        
-        const x = d3.scaleLinear()
-            .domain(d3.extent(cleanedData, d => d.Season))
-            .range([0, width]);
+    const data = await d3.csv("datasets/LeagueTotals.csv");
 
-        const y = d3.scaleLinear()
-            .domain([2.5, d3.max(cleanedData, d => d.SeasonGoals)])
-            .range([height, 0]);
+    const cleanedData = data
+        .filter(d => d["Season"] && d["Season Goals"]) 
+        .map(d => ({
+            Season: d["Season"],
+            Year: +d["Season"].split('-')[0],
+            SeasonGoals: +d["Season Goals"]
+        }))
+        .filter(d => d.Year >= 1990 && d.Year <= 2023)
+        .sort((a, b) => a.Year - b.Year);
 
-        svg.append("g")
-            .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(x).tickFormat(d3.format("d")))
-            .append("text")
-            .attr("x", width / 2)
-            .attr("y", 40)
-            .attr("fill", "black")
-            .style("font-size", "14px")
-            .style("text-anchor", "middle")
-            .text("Season");
+    console.log(cleanedData);
 
-        svg.append("g")
-            .call(d3.axisLeft(y))
-            .append("text")
-            .attr("x", -height / 2)
-            .attr("y", -50)
-            .attr("transform", "rotate(-90)")
-            .attr("fill", "black")
-            .style("font-size", "14px")
-            .style("text-anchor", "middle")
-            .text("Goals per Season");
+    const x = d3.scaleLinear()
+        .domain(d3.extent(cleanedData, d => d.Year))
+        .range([0, width]);
 
-        const line = d3.line()
-            .x(d => x(d.Season))
-            .y(d => y(d.SeasonGoals));
+    const y = d3.scaleLinear()
+        .domain([2.5, d3.max(cleanedData, d => d.SeasonGoals)])
+        .range([height, 0]);
 
-        svg.append("path")
-            .datum(cleanedData)
-            .attr("class", "line")
-            .attr("d", line);
+    svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")))
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", 40)
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Season");
+
+    svg.append("g")
+        .call(d3.axisLeft(y))
+        .append("text")
+        .attr("x", -height / 2)
+        .attr("y", -50)
+        .attr("transform", "rotate(-90)")
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Goals per Season");
+
+    const line = d3.line()
+        .x(d => x(d.Year))
+        .y(d => y(d.SeasonGoals));
+
+    svg.append("path")
+        .datum(cleanedData)
+        .attr("class", "line")
+        .attr("d", line);
+
+    // Tooltip
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "rgba(0, 0, 0, 0.7)")
+        .style("color", "white")
+        .style("padding", "5px")
+        .style("border-radius", "4px");
+
+    const dot = svg.append("circle")
+        .attr("r", 5)
+        .attr("fill", "black")
+        .style("visibility", "hidden");
+
+    const rects = svg.append("g")
+        .attr("fill", "none")
+        .attr("pointer-events", "all");
+
+    cleanedData.forEach(d => {
+        rects.append("rect")
+            .attr("x", x(d.Year))
+            .attr("height", height)
+            .attr("width", 5)
+            .on("mouseover", function(event) {
+                tooltip.style("visibility", "visible")
+                    .text(`Season: ${d.Season}, Goals: ${d.SeasonGoals}`);
+
+                dot.attr("cx", x(d.Year))
+                    .attr("cy", y(d.SeasonGoals))
+                    .style("visibility", "visible");
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("top", (event.pageY + 5) + "px")
+                    .style("left", (event.pageX + 5) + "px");
+            })
+            .on("mouseout", function() {
+                tooltip.style("visibility", "hidden");
+                dot.style("visibility", "hidden");
+            });
     });
 }
 
 async function drawVis6() {
-
+    
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
-    width = 800 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+        width = 900 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
 
-        const svg = d3.select("#vis2-3")
-            .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
+    const svg = d3.select("#vis2-3")
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        d3.csv("datasets/LeagueTotals.csv").then(data => {
-            
-        const cleanedData = data
-            .filter(d => d["Season"] && d["Season Goals"]) 
-            .map(d => ({
-                Season: +d["Season"].split('-')[0], 
-                SeasonGoals: +d["Season Goals"]
-            }))
-            .filter(d => d.Season >= 1994 && d.Season <= 2005)
-            .sort((a, b) => a.Season - b.Season);
-            console.log(cleanedData);
-        
-        const x = d3.scaleLinear()
-            .domain(d3.extent(cleanedData, d => d.Season))
-            .range([0, width]);
+    const data = await d3.csv("datasets/LeagueTotals.csv");
+
+    const cleanedData = data
+        .filter(d => d["Season"] && d["Season Goals"]) 
+        .map(d => ({
+            Season: d["Season"],
+            Year: +d["Season"].split('-')[0],
+            SeasonGoals: +d["Season Goals"]
+        }))
+        .filter(d => d.Year >= 1994 && d.Year <= 2005)
+        .sort((a, b) => a.Year - b.Year);
+
+    console.log(cleanedData);
+
+    const x = d3.scaleLinear()
+        .domain(d3.extent(cleanedData, d => d.Year))
+        .range([0, width]);
 
         const y = d3.scaleLinear()
-            .domain([2.5, d3.max(cleanedData, d => d.SeasonGoals)])
-            .range([height, 0]);
+        .domain([3000, 7500]) // Set the lower bound to 3000
+        .range([height, 0]);
 
-        svg.append("g")
-            .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(x).tickFormat(d3.format("d")))
-            .append("text")
-            .attr("x", width / 2)
-            .attr("y", 40)
-            .attr("fill", "black")
-            .style("font-size", "14px")
-            .style("text-anchor", "middle")
-            .text("Season");
+    svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).tickFormat(d => {
+            const year = d;
+            return `${year}-${year + 1}`;
+        }))
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", 40)
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Season");
 
-        svg.append("g")
-            .call(d3.axisLeft(y))
-            .append("text")
-            .attr("x", -height / 2)
-            .attr("y", -50)
-            .attr("transform", "rotate(-90)")
-            .attr("fill", "black")
-            .style("font-size", "14px")
-            .style("text-anchor", "middle")
-            .text("Goals per Season");
+    svg.append("g")
+        .call(d3.axisLeft(y))
+        .append("text")
+        .attr("x", -height / 2)
+        .attr("y", -50)
+        .attr("transform", "rotate(-90)")
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Goals per Season");
 
-        const line = d3.line()
-            .x(d => x(d.Season))
-            .y(d => y(d.SeasonGoals));
+    const line = d3.line()
+        .x(d => x(d.Year))
+        .y(d => y(d.SeasonGoals));
 
-        svg.append("path")
-            .datum(cleanedData)
-            .attr("class", "line")
-            .attr("d", line);
+    svg.append("path")
+        .datum(cleanedData)
+        .attr("class", "line")
+        .attr("d", line);
+
+    // Tooltip
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "rgba(0, 0, 0, 0.7)")
+        .style("color", "white")
+        .style("padding", "5px")
+        .style("border-radius", "4px");
+
+    const dot = svg.append("circle")
+        .attr("r", 5)
+        .attr("fill", "black")
+        .style("visibility", "hidden");
+
+    const rects = svg.append("g")
+        .attr("fill", "none")
+        .attr("pointer-events", "all");
+
+    cleanedData.forEach(d => {
+        rects.append("rect")
+            .attr("x", x(d.Year))
+            .attr("height", height)
+            .attr("width", 5)
+            .on("mouseover", function(event) {
+                tooltip.style("visibility", "visible")
+                    .text(`Season: ${d.Season}, Goals: ${d.SeasonGoals}`);
+
+                dot.attr("cx", x(d.Year))
+                    .attr("cy", y(d.SeasonGoals))
+                    .style("visibility", "visible");
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("top", (event.pageY + 5) + "px")
+                    .style("left", (event.pageX + 5) + "px");
+            })
+            .on("mouseout", function() {
+                tooltip.style("visibility", "hidden");
+                dot.style("visibility", "hidden");
+            });
     });
 }
+
 
 async function drawVis7() {
 
