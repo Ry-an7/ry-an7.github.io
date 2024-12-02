@@ -1061,12 +1061,12 @@ async function drawVis10() {
     const cleanedData = data
         .filter(d => d["Season"] && d["Save Percentage"])
         .map(d => ({
-            Season: d["Season"],  // Keep full season string (e.g., "1995-1996")
-            Year: +d["Season"].split('-')[0],  // Extract start year (e.g., "1995")
+            Season: d["Season"],
+            Year: +d["Season"].split('-')[0],
             SavePercentage: +d["Save Percentage"]
         }))
         .filter(d => d.Year >= 1995 && d.Year <= 2005)
-        .sort((a, b) => a.Year - b.Year);  // Sort by start year
+        .sort((a, b) => a.Year - b.Year);
 
     console.log(cleanedData);
 
@@ -1128,7 +1128,6 @@ async function drawVis10() {
         .attr("fill", "none")
         .attr("pointer-events", "all");
 
-    // Add rectangles for the tooltip interaction
     cleanedData.forEach(d => {
         rects.append("rect")
             .attr("x", x(d.Year))
@@ -1153,14 +1152,11 @@ async function drawVis10() {
     });
 }
 
-
-
-
 async function drawVis11() {
 
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
-    width = 800 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 1000 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
 
     const svg = d3.select("#vis5-1")
         .append("g")
@@ -1188,9 +1184,15 @@ async function drawVis11() {
         .domain([20, d3.max(cleanedData, d => d.NumberofTeams)])
         .range([height, 0]);
 
+    const xAxisTicks = cleanedData
+        .map(d => d.Year)
+        .filter(year => year !== 2004 && year !== 2005);
+
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x).tickFormat(d3.format("d")))
+        .call(d3.axisBottom(x)
+            .tickValues(xAxisTicks)
+            .tickFormat(d3.format("d")))
         .append("text")
         .attr("x", width / 2)
         .attr("y", 40)
@@ -1261,6 +1263,9 @@ async function drawVis11() {
             });
     });
 }
+
+
+
 
 
 
