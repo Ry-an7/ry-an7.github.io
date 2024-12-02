@@ -1171,7 +1171,7 @@ async function drawVis11() {
             Year: +d["Season"].split('-')[0],
             NumberofTeams: +d["Number of Teams"]
         }))
-        .filter(d => d.Year >= 1979 && d.Year <= 2006)
+        .filter(d => d.Year >= 1979 && d.Year <= 2006 && !(d.Year === 2004 || d.Year === 2005)) // Exclude 2004 and 2005
         .sort((a, b) => a.Year - b.Year);
 
     console.log(cleanedData);
@@ -1184,15 +1184,9 @@ async function drawVis11() {
         .domain([20, d3.max(cleanedData, d => d.NumberofTeams)])
         .range([height, 0]);
 
-    const xAxisTicks = cleanedData
-        .map(d => d.Year)
-        .filter(year => year !== 2004 && year !== 2005);
-
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x)
-            .tickValues(xAxisTicks)
-            .tickFormat(d3.format("d")))
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")).ticks(d3.max(cleanedData, d => d.Year) - d3.min(cleanedData, d => d.Year)))
         .append("text")
         .attr("x", width / 2)
         .attr("y", 40)
@@ -1263,7 +1257,6 @@ async function drawVis11() {
             });
     });
 }
-
 
 
 
