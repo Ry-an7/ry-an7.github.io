@@ -1258,19 +1258,124 @@ async function drawVis11() {
     });
 }
 
+async function drawVis12() {
+
+    const margin = {top: 20, right: 30, bottom: 50, left: 60},
+        width = 1000 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
+
+    const svg = d3.select("#vis6-1")
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const data = await d3.csv("datasets/LeagueTotals.csv");
+
+    const cleanedData = data
+        .filter(d => d["Season"] && d["Power Play Opportunities"])
+        .map(d => ({
+            Season: d["Season"],
+            Year: +d["Season"].split('-')[0],
+            PowerPlayOpportunities: +d["Power Play Opportunities"]
+        }))
+        .filter(d => d.Year >= 1990 && d.Year <= 2005)
+        .sort((a, b) => a.Year - b.Year);
+
+    console.log(cleanedData);
+
+    const x = d3.scaleLinear()
+        .domain(d3.extent(cleanedData, d => d.Year))
+        .range([0, width]);
+
+    const y = d3.scaleLinear()
+        .domain([0, d3.max(cleanedData, d => d.PowerPlayOpportunities)])
+        .range([height, 0]);
+
+    svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")).ticks(cleanedData.length))
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", 40)
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Season");
+
+    svg.append("g")
+        .call(d3.axisLeft(y))
+        .append("text")
+        .attr("x", -height / 2)
+        .attr("y", -50)
+        .attr("transform", "rotate(-90)")
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Powerplay Opportunities");
+
+    const line = d3.line()
+        .x(d => x(d.Year))
+        .y(d => y(d.PowerPlayOpportunities));
+
+    svg.append("path")
+        .datum(cleanedData)
+        .attr("class", "line")
+        .attr("d", line);
+
+    // Tooltips
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "rgba(0, 0, 0, 0.7)")
+        .style("color", "white")
+        .style("padding", "5px")
+        .style("border-radius", "4px");
+
+    const dot = svg.append("circle")
+        .attr("r", 5)
+        .attr("fill", "black")
+        .style("visibility", "hidden");
+
+    const rects = svg.append("g")
+        .attr("fill", "none")
+        .attr("pointer-events", "all");
+
+    cleanedData.forEach(d => {
+        rects.append("rect")
+            .attr("x", x(d.Year))
+            .attr("height", height)
+            .attr("width", 5)
+            .on("mouseover", function(event) {
+                tooltip.style("visibility", "visible")
+                    .html(`<strong>Season:</strong> ${d.Season}<br><strong>Powerplay Opportunities:</strong> ${d.PowerPlayOpportunities}`);
+
+                dot.attr("cx", x(d.Year))
+                    .attr("cy", y(d.PowerPlayOpportunities))
+                    .style("visibility", "visible");
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("top", (event.pageY + 5) + "px")
+                    .style("left", (event.pageX + 5) + "px");
+            })
+            .on("mouseout", function() {
+                tooltip.style("visibility", "hidden");
+                dot.style("visibility", "hidden");
+            });
+    });
+}
 
 
 
 
-
-    drawVis1();
-    drawVis2();
-    drawVis3();
-    drawVis4();
-    drawVis5();
-    drawVis6();
-    drawVis7();
-    drawVis8();
-    drawVis9();
-    drawVis10();
-    drawVis11();
+drawVis1();
+drawVis2();
+drawVis3();
+drawVis4();
+drawVis5();
+drawVis6();
+drawVis7();
+drawVis8();
+drawVis9();
+drawVis10();
+drawVis11();
+drawVis12();
