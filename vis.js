@@ -2,6 +2,11 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 console.log(d3);
 
+// Ensure refresh starts at top (so scrolly stuff doesn't get weird)
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+};
+
 var container = d3.select('#scroll');
 var graphic = container.select('.scroll__graphic');
 var chart = graphic.select('.chart');
@@ -12,7 +17,7 @@ var scroller = scrollama();
 
 // resize function to set dimensions on load and on page resize
 function handleResize() {
-    var stepHeight = Math.floor(window.innerHeight * 0.9); // was * .75
+    var stepHeight = Math.floor(window.innerHeight * 0.75);
 			step.style('height', stepHeight + 'px');
 			// 2. update width/height of graphic element
 			var bodyWidth = d3.select('body').node().offsetWidth;
@@ -45,18 +50,43 @@ function handleStepEnter(response) {
     // Log step and direction
     console.log(`Step: ${response.index}, Direction: ${response.direction}`);
 
-    // Switch visualization based on step
     switch (response.index) {
         case 0:
-            drawVis1(); // Visualization for step 0
+            drawVis1();
             break;
         case 1:
-            drawVis2(); // Visualization for step 1
+            drawVis2();
             break;
         case 2:
-            drawVis3(); // Visualization for step 2
+            drawVis3();
             break;
-        // Add cases for additional steps as needed
+        case 3:
+            drawVis4();
+            break;
+        case 4:
+            drawVis5();
+            break;
+        case 5:
+            drawVis6();
+            break;
+        case 6:
+            drawVis7();
+            break;
+        case 7:
+            drawVis8();
+            break;
+        case 8:
+            drawVis9();
+            break;
+        case 9:
+            drawVis10();
+            break;
+        case 10:
+            drawVis11();
+            break;
+        case 11:
+            drawVis12();
+            break;
         default:
             console.log(`No visualization for step ${response.index}`);
     }
@@ -76,6 +106,10 @@ function handleContainerExit(response) {
 	// un-sticky the graphic, and pin to top/bottom of container
 	graphic.classed('is-fixed', false);
 	graphic.classed('is-bottom', response.direction === 'down');
+
+    if (response.direction === 'down') {
+        transitionExit()
+    }
 }
 
 // kick-off code to run once on load
@@ -87,8 +121,8 @@ function init() {
 			graphic: '.scroll__graphic', // the graphic
 			text: '.scroll__text', // the step container
 			step: '.scroll__text .step', // the step elements
-			offset: 0.3, // set the trigger to be 1/2 way down screen
-			debug: true, // display the trigger offset for testing
+			offset: 0.4, // set the trigger to be 1/2 way down screen
+			debug: false, // display the trigger offset for testing
 		})
 		.onStepEnter(handleStepEnter)
 		.onContainerEnter(handleContainerEnter)
@@ -106,7 +140,7 @@ async function drawVis1() {
     width = 800 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-    const svg = d3.select("#vis1")
+    const svg = d3.select("#vis")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -255,7 +289,7 @@ async function drawVis2() {
     width = 800 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-    const svg = d3.select("#vis1")
+    const svg = d3.select("#vis")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -329,7 +363,6 @@ async function drawVis2() {
         .attr("fill", "none")
         .attr("pointer-events", "all");
 
-    // Handle pairs of data points
     d3.pairs(cleanedData, (a, b) => {
         rects.append("rect")
             .attr("x", x(a.Season))
@@ -355,12 +388,11 @@ async function drawVis2() {
             });
     });
 
-    // Add last data point manually
     const last = cleanedData[cleanedData.length - 1];
     rects.append("rect")
         .attr("x", x(last.Season))
         .attr("height", height)
-        .attr("width", 1) // Single point, no width for the rectangle
+        .attr("width", 1)
         .on("mouseover", function(event) {
             const seasonRange = `${last.Season}-${last.Season + 1}`;
             tooltip.style("visibility", "visible")
@@ -385,7 +417,7 @@ async function drawVis3() {
         width = 800 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
-    const svg = d3.select("#vis1-3")
+    const svg = d3.select("#vis")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -485,14 +517,13 @@ async function drawVis3() {
     });
 }
 
-
 async function drawVis4() {
 
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
         width = 800 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
-    const svg = d3.select("#vis2-1")
+    const svg = d3.select("#vis")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -597,7 +628,7 @@ async function drawVis5() {
         width = 800 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
-    const svg = d3.select("#vis2-2")
+    const svg = d3.select("#vis")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -703,7 +734,7 @@ async function drawVis6() {
         width = 900 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
-    const svg = d3.select("#vis2-3")
+    const svg = d3.select("#vis")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -812,7 +843,7 @@ async function drawVis7() {
         height = 600 - margin.top - margin.bottom;
     const tickValues = d3.range(8, 12.9, 0.5).concat(12.9);
 
-    const svg = d3.select("#vis3-1")
+    const svg = d3.select("#vis")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -940,7 +971,7 @@ async function drawVis8() {
 
     const tickValues = d3.range(8.5, 12.2, 0.5).concat(12.2);
 
-    const svg = d3.select("#vis3-2")
+    const svg = d3.select("#vis")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -1070,7 +1101,7 @@ async function drawVis9() {
 
     const tickValues = d3.range(0.865, 0.930, 0.005);
 
-    const svg = d3.select("#vis4-1")
+    const svg = d3.select("#vis")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -1198,7 +1229,7 @@ async function drawVis10() {
 
     const tickValues = d3.range(0.890, 0.915, 0.001);
 
-    const svg = d3.select("#vis4-2")
+    const svg = d3.select("#vis")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -1304,7 +1335,7 @@ async function drawVis11() {
     width = 1000 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
-    const svg = d3.select("#vis5-1")
+    const svg = d3.select("#vis")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -1410,7 +1441,7 @@ async function drawVis12() {
         width = 1000 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
-    const svg = d3.select("#vis6-1")
+    const svg = d3.select("#vis")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -1509,9 +1540,6 @@ async function drawVis12() {
             });
     });
 }
-
-
-
 
 // drawVis1();
 // drawVis2();

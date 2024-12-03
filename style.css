@@ -63,19 +63,18 @@
 
 .chart {
     position: absolute;
-    left: 82rem;
-    top: 50%;
+    left: 50rem;
+    top: 40%;
     -moz-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
-    background-color: #fff;
 }
 
 svg {
     display: block;
     margin: auto;
     background-color: white;
-    border: 1px solid #ccc; /* Optional border for better visibility */
+    border: 1px solid #ccc;
 }
 
 .line {
@@ -93,10 +92,14 @@ svg {
     text-align: center;
     padding: 1rem;
 }
+.step is-active {
+    height: 500px;
+}
 
 .step is-active p {
     font-size: 1.15rem;
 }
+
 
 .image-container {
     position: relative;
