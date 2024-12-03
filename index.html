@@ -11,7 +11,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="image-container">
+    <section id="intro">
+        <h1 class="intro__hed">NHL's Dead Puck Era</h1>
+        <p class="intro__dek">Can this era be explained through statistical data?</p>
+        <p class="intro_bod">The National Hockey League (NHL) is the largest professional ice hockey league in North America, consisting of 32 teams - 25 in the United States and 7 in Canada. Scoring is the cornerstone of the NHL, where the primary objective is to outscore the opponent by putting more pucks into their net. Throughout the league's history, scoring trends have reflected shifts in playing styles, rule changes, and strategies, from the high-flying offense of the 1980s, to periods of defensive dominance that stifled scoring opportunities and reshaped how the game was played. The Dead Puck Era, a time when goals became scarce due to a combination of defensive systems, lenient officiating, and the large sizes of goaltending equipment is a constant discussion online. Pinpointing the exact timeline of the Dead Puck Era is challenging due to varying opinions online, but I will determine through statistics of when I believe the era started and ended.</p>
+    </section>
+
+    <section id='scroll'>
+        <div class='scroll__graphic'>
+            <div class='chart'>
+                <svg id="vis1" width="800" height="500"></svg>
+            </div>
+        </div>
+    
+        <!--  step/text container  -->
+        <div class='scroll__text'>
+            <div class='step' data-step='1'>
+                <h2 class="subheader">The average number of goals scored across the entire history of the NHL.</h2>
+                <p>Exploring the season average of Goals Per Game across the whole history of the NHL, we can see that goals per game have fluctuated throughout the history of the NHL, with periods where the number of goals scored per game has been less than the average line of 3.03 goals per game. The time period which I want to focus on is the year 1990-2023.</p>
+            </div>
+            <div class='step' data-step='2'>
+                <h2 class="subheader">Narrowing the scope</h2>
+                <p>From here, we can see that there is a significant drop off in average goals scored per game from the 1992-1999 season with the drop off being almost a goal per game (0.99 goals). There was a significant rise in the 2005-2006 season from the 2003-2004 season by half a goal (0.51 goals). The average goes back down after the 2005-2006 season, but it fluctuates up and down until the 2014-2015 season where it has consistently gone up since. The 2004-2005 season was cancelled due to a labour dispute and therefore has no data.</p>
+            </div>
+            <div class='step' data-step='3'>
+                <h2 class="subheader">The Dead Puck Era</h2>
+                <p>Looking even closer, we can see that from 1997-2004 is the period where the average goals per game have been the lowest, with the 2003-2004 season having the lowest average goals per game at 2.57 goals per game. This time frame is what I identify as the Dead Puck Era. </p>
+            </div>
+            <div class='step' data-step='4'>
+                <h2 class="subheader">Total goals scored per season</h2>
+                <p>Exploring the season average of Goals Per Game across the whole history of the NHL, we can see that goals per game have fluctuated throughout the history of the NHL, with periods where the number of goals scored per game has been less than the average line of 3.03 goals per game. The time period which I want to focus on is the year 1990-2023.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- <div class="image-container">
         <img src="images/Puck.jpg" alt="Image of a Puck on An Ice Surface" width="1800" height="1000">
         <h1 class="title-text">NHL's Dead Puck Era</h1>
     </div>
@@ -213,7 +250,6 @@
 
         <div class="visV">
             <svg id="vis6-1" width="1000" height="600"></svg>
-            <!-- <img src="images/vis6.png" alt="Diagram of Offside and Onside after rule change." width="800" height="800"> -->
             <div class="text-below">
                 <p>
                     When examining total power play opportunities from 1990 to 2005, several intriguing trends emerge. The crackdown on obstruction penalties led to a significant spike in opportunities, increasing by approximately 4,000 compared to the previous season. During the Dead Puck Era (1997–2004), power play opportunities consistently remained below 11,000, with only one exception. This suggests that the lack of enforcement of obstruction penalties likely contributed to the characteristics of the Dead Puck Era.
@@ -232,8 +268,11 @@
                 This era emphasized the delicate balance the NHL must uphold between offense and defense to sustain the game's excitement and appeal. Scoring is the cornerstone of hockey, driving its thrill and entertainment, and the league must ensure a consistently high level of scoring to keep fans engaged and invested in the sport.
                 </p>
             </div>
-        </div>
-
+        </div> -->
+        <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+        <script src="https://unpkg.com/scrollama"></script>
         <script type="module" src="vis.js"></script>
+        <script src="scrollama.min.js"></script>
+        <!-- <script type="module" src="scrollama.js"></script> -->
 </body>
 </html>

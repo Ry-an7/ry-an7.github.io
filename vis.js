@@ -2,6 +2,105 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 console.log(d3);
 
+var container = d3.select('#scroll');
+var graphic = container.select('.scroll__graphic');
+var chart = graphic.select('.chart');
+var text = container.select('.scroll__text');
+var step = text.selectAll('.step');
+
+var scroller = scrollama();
+
+// resize function to set dimensions on load and on page resize
+function handleResize() {
+    var stepHeight = Math.floor(window.innerHeight * 0.9); // was * .75
+			step.style('height', stepHeight + 'px');
+			// 2. update width/height of graphic element
+			var bodyWidth = d3.select('body').node().offsetWidth;
+			graphic
+				.style('width', bodyWidth + 'px')
+				.style('height', window.innerHeight + 'px');
+			var chartMargin = bodyWidth > 350 ? 32 : 10;
+			var textWidth = text.node().offsetWidth;
+			var chartWidth = graphic.node().offsetWidth - textWidth - chartMargin;
+			console.log('chartwidth:', chartWidth)
+			chart
+				.style('width', chartWidth + 'px')
+				.style('height', Math.floor(window.innerHeight / 1.2) + 'px');
+			// 3. tell scrollama to update new element dimensions
+			scroller.resize();
+}
+
+// scrollama event handlers
+function handleStepEnter(response) {
+// response = { element, direction, index }
+
+	// fade in current step
+	step.classed('is-active', function (d, i) {
+		return i === response.index;
+	})
+
+    //clear svg
+    d3.select('svg').selectAll('*').remove();
+
+    // Log step and direction
+    console.log(`Step: ${response.index}, Direction: ${response.direction}`);
+
+    // Switch visualization based on step
+    switch (response.index) {
+        case 0:
+            drawVis1(); // Visualization for step 0
+            break;
+        case 1:
+            drawVis2(); // Visualization for step 1
+            break;
+        case 2:
+            drawVis3(); // Visualization for step 2
+            break;
+        // Add cases for additional steps as needed
+        default:
+            console.log(`No visualization for step ${response.index}`);
+    }
+} 
+
+function handleContainerEnter(response) {
+	// response = { direction }
+
+	// sticky the graphic
+	graphic.classed('is-fixed', true);
+	graphic.classed('is-bottom', false);
+}
+
+function handleContainerExit(response) {
+	// response = { direction }
+
+	// un-sticky the graphic, and pin to top/bottom of container
+	graphic.classed('is-fixed', false);
+	graphic.classed('is-bottom', response.direction === 'down');
+}
+
+// kick-off code to run once on load
+function init() {
+    handleResize();
+    scroller
+		.setup({
+			container: '#scroll', // our outermost scrollytelling element
+			graphic: '.scroll__graphic', // the graphic
+			text: '.scroll__text', // the step container
+			step: '.scroll__text .step', // the step elements
+			offset: 0.3, // set the trigger to be 1/2 way down screen
+			debug: true, // display the trigger offset for testing
+		})
+		.onStepEnter(handleStepEnter)
+		.onContainerEnter(handleContainerEnter)
+		.onContainerExit(handleContainerExit);
+
+	// setup resize event
+	window.addEventListener('resize', handleResize);
+}
+
+// start it up
+init();
+
 async function drawVis1() {
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
     width = 800 - margin.left - margin.right,
@@ -156,7 +255,7 @@ async function drawVis2() {
     width = 800 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-    const svg = d3.select("#vis1-2")
+    const svg = d3.select("#vis1")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -280,7 +379,6 @@ async function drawVis2() {
             dot.style("visibility", "hidden");
         });
 }
-
 
 async function drawVis3() {
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
@@ -1415,15 +1513,15 @@ async function drawVis12() {
 
 
 
-drawVis1();
-drawVis2();
-drawVis3();
-drawVis4();
-drawVis5();
-drawVis6();
-drawVis7();
-drawVis8();
-drawVis9();
-drawVis10();
-drawVis11();
-drawVis12();
+// drawVis1();
+// drawVis2();
+// drawVis3();
+// drawVis4();
+// drawVis5();
+// drawVis6();
+// drawVis7();
+// drawVis8();
+// drawVis9();
+// drawVis10();
+// drawVis11();
+// drawVis12();

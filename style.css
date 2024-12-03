@@ -2,12 +2,73 @@
     font-family: 'Nunito', sans-serif;
 }
 
-body {
+/* body {
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #f0f0f0;
+} */
+
+#intro {
+    max-width: 45rem;
+    margin: 1rem auto 20rem;
+    text-align: center;
+}
+
+.intro__hed {
+    font-size: 3em;
+    margin: 0.9rem auto;
+}
+
+.intro__dek {
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+}
+
+.intro_bod {
+    font-size: 1.3rem;
+}
+
+#scroll {
+    position: relative;
+}
+
+.scroll__graphic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: auto;
+    width: 100%;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.scroll__graphic.is-fixed {
+    position: fixed;
+}
+
+.scroll__graphic.is-bottom {
+    bottom: 0;
+    top: auto;
+}
+
+.scroll__text {
+    position: relative;
+    padding: 0 1rem;
+    margin-left: 7rem;
+    max-width: 50rem;
+}
+
+.chart {
+    position: absolute;
+    left: 82rem;
+    top: 50%;
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background-color: #fff;
 }
 
 svg {
@@ -22,6 +83,21 @@ svg {
     stroke: steelblue;
     stroke-width: 2px;
 }
+
+.subheader {
+    text-align: center;
+
+}
+
+.step p {
+    text-align: center;
+    padding: 1rem;
+}
+
+.step is-active p {
+    font-size: 1.15rem;
+}
+
 .image-container {
     position: relative;
     text-align: center;
