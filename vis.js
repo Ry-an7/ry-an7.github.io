@@ -3,7 +3,6 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 console.log(d3);
 
 async function drawVis1() {
-
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
     width = 800 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -126,6 +125,29 @@ async function drawVis1() {
                 dot.style("visibility", "hidden");
             });
     });
+
+    const last = cleanedData[cleanedData.length - 1];
+    rects.append("rect")
+        .attr("x", x(last.Season))
+        .attr("height", height)
+        .attr("width", 1)
+        .on("mouseover", function(event) {
+            const seasonRange = `${last.Season}-${last.Season + 1}`;
+            tooltip.style("visibility", "visible")
+                .html(`<strong>Season:</strong> ${seasonRange}<br><strong>Avg. Goals:</strong> ${last.AverageGoalsPerGame.toFixed(2)}`);
+
+            dot.attr("cx", x(last.Season))
+                .attr("cy", y(last.AverageGoalsPerGame))
+                .style("visibility", "visible");
+        })
+        .on("mousemove", function(event) {
+            tooltip.style("top", (event.pageY + 5) + "px")
+                .style("left", (event.pageX + 5) + "px");
+        })
+        .on("mouseout", function() {
+            tooltip.style("visibility", "hidden");
+            dot.style("visibility", "hidden");
+        });
 }
 
 async function drawVis2() {
@@ -208,6 +230,7 @@ async function drawVis2() {
         .attr("fill", "none")
         .attr("pointer-events", "all");
 
+    // Handle pairs of data points
     d3.pairs(cleanedData, (a, b) => {
         rects.append("rect")
             .attr("x", x(a.Season))
@@ -232,7 +255,32 @@ async function drawVis2() {
                 dot.style("visibility", "hidden");
             });
     });
+
+    // Add last data point manually
+    const last = cleanedData[cleanedData.length - 1];
+    rects.append("rect")
+        .attr("x", x(last.Season))
+        .attr("height", height)
+        .attr("width", 1) // Single point, no width for the rectangle
+        .on("mouseover", function(event) {
+            const seasonRange = `${last.Season}-${last.Season + 1}`;
+            tooltip.style("visibility", "visible")
+                .html(`<strong>Season:</strong> ${seasonRange}<br><strong>Avg. Goals:</strong> ${last.AverageGoalsPerGame.toFixed(2)}`);
+
+            dot.attr("cx", x(last.Season))
+                .attr("cy", y(last.AverageGoalsPerGame))
+                .style("visibility", "visible");
+        })
+        .on("mousemove", function(event) {
+            tooltip.style("top", (event.pageY + 5) + "px")
+                .style("left", (event.pageX + 5) + "px");
+        })
+        .on("mouseout", function() {
+            tooltip.style("visibility", "hidden");
+            dot.style("visibility", "hidden");
+        });
 }
+
 
 async function drawVis3() {
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
