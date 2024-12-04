@@ -1335,7 +1335,7 @@ async function drawVis11() {
     width = 1000 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
-    const svg = d3.select("#vis")
+    const svg = d3.select("#vis5-1")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -1441,7 +1441,7 @@ async function drawVis12() {
         width = 1000 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
-    const svg = d3.select("#vis")
+    const svg = d3.select("#vis6-1")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
