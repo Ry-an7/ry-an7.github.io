@@ -1551,5 +1551,5 @@ async function drawVis12() {
 // drawVis8();
 // drawVis9();
 // drawVis10();
-// drawVis11();
-// drawVis12();
+drawVis11();
+drawVis12();
