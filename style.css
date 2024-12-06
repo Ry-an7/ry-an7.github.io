@@ -37,12 +37,13 @@
 .scroll__graphic {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 15rem;
     bottom: auto;
     width: 100%;
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+    margin-top: 100px;
 }
 
 .scroll__graphic.is-fixed {
@@ -57,7 +58,7 @@
 .scroll__text {
     position: relative;
     padding: 0 1rem;
-    margin-left: 7rem;
+    margin-left: 20rem;
     max-width: 50rem;
 }
 
@@ -89,7 +90,6 @@ svg {
 }
 
 .step p {
-    text-align: center;
     padding: 1rem;
 }
 .step is-active {

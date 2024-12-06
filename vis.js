@@ -17,7 +17,7 @@ var scroller = scrollama();
 
 // resize function to set dimensions on load and on page resize
 function handleResize() {
-    var stepHeight = Math.floor(window.innerHeight * 0.75);
+    var stepHeight = Math.floor(window.innerHeight * 0.25);
 			step.style('height', stepHeight + 'px');
 			// 2. update width/height of graphic element
 			var bodyWidth = d3.select('body').node().offsetWidth;
@@ -84,9 +84,6 @@ function handleStepEnter(response) {
         case 10:
             drawVis11();
             break;
-        case 11:
-            drawVis12();
-            break;
         default:
             console.log(`No visualization for step ${response.index}`);
     }
@@ -121,7 +118,7 @@ function init() {
 			graphic: '.scroll__graphic', // the graphic
 			text: '.scroll__text', // the step container
 			step: '.scroll__text .step', // the step elements
-			offset: 0.4, // set the trigger to be 1/2 way down screen
+			offset: 0.1, // set the trigger to be 1/2 way down screen
 			debug: false, // display the trigger offset for testing
 		})
 		.onStepEnter(handleStepEnter)
@@ -130,6 +127,7 @@ function init() {
 
 	// setup resize event
 	window.addEventListener('resize', handleResize);
+    drawVis1();
 }
 
 // start it up
@@ -138,7 +136,7 @@ init();
 async function drawVis1() {
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
     width = 800 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    height = 600 - margin.top - margin.bottom;
 
     const svg = d3.select("#vis")
         .append("g")
@@ -287,7 +285,7 @@ async function drawVis2() {
 
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
     width = 800 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    height = 600 - margin.top - margin.bottom;
 
     const svg = d3.select("#vis")
         .append("g")
@@ -415,7 +413,7 @@ async function drawVis2() {
 async function drawVis3() {
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
         width = 800 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        height = 600 - margin.top - margin.bottom;
 
     const svg = d3.select("#vis")
         .append("g")
@@ -521,7 +519,7 @@ async function drawVis4() {
 
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
         width = 800 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        height = 600 - margin.top - margin.bottom;
 
     const svg = d3.select("#vis")
         .append("g")
@@ -626,7 +624,7 @@ async function drawVis5() {
 
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
         width = 800 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        height = 600 - margin.top - margin.bottom;
 
     const svg = d3.select("#vis")
         .append("g")
@@ -732,7 +730,7 @@ async function drawVis6() {
     
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
         width = 900 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        height = 600 - margin.top - margin.bottom;
 
     const svg = d3.select("#vis")
         .append("g")
