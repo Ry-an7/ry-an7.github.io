@@ -3,126 +3,126 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 console.log(d3);
 
 // Ensure refresh starts at top (so scrolly stuff doesn't get weird)
-window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-};
+// window.onbeforeunload = function () {
+//     window.scrollTo(0, 0);
+// };
 
-var container = d3.select('#scroll');
-var graphic = container.select('.scroll__graphic');
-var chart = graphic.select('.chart');
-var text = container.select('.scroll__text');
-var step = text.selectAll('.step');
+// var container = d3.select('#scroll');
+// var graphic = container.select('.scroll__graphic');
+// var chart = graphic.select('.chart');
+// var text = container.select('.scroll__text');
+// var step = text.selectAll('.step');
 
-var scroller = scrollama();
+// var scroller = scrollama();
 
-// resize function to set dimensions on load and on page resize
-function handleResize() {
-    var stepHeight = Math.floor(window.innerHeight * 0.25);
-			step.style('height', stepHeight + 'px');
-			// 2. update width/height of graphic element
-			var bodyWidth = d3.select('body').node().offsetWidth;
-			graphic
-				.style('width', bodyWidth + 'px')
-				.style('height', window.innerHeight + 'px');
-			var chartMargin = bodyWidth > 350 ? 32 : 10;
-			var textWidth = text.node().offsetWidth;
-			var chartWidth = graphic.node().offsetWidth - textWidth - chartMargin;
-			console.log('chartwidth:', chartWidth)
-			chart
-				.style('width', chartWidth + 'px')
-				.style('height', '600px');
-			// 3. tell scrollama to update new element dimensions
-			scroller.resize();
-}
+// // resize function to set dimensions on load and on page resize
+// function handleResize() {
+//     var stepHeight = Math.floor(window.innerHeight * 0.25);
+// 			step.style('height', stepHeight + 'px');
+// 			// 2. update width/height of graphic element
+// 			var bodyWidth = d3.select('body').node().offsetWidth;
+// 			graphic
+// 				.style('width', bodyWidth + 'px')
+// 				.style('height', window.innerHeight + 'px');
+// 			var chartMargin = bodyWidth > 350 ? 32 : 10;
+// 			var textWidth = text.node().offsetWidth;
+// 			var chartWidth = graphic.node().offsetWidth - textWidth - chartMargin;
+// 			console.log('chartwidth:', chartWidth)
+// 			chart
+// 				.style('width', chartWidth + 'px')
+// 				.style('height', '600px');
+// 			// 3. tell scrollama to update new element dimensions
+// 			scroller.resize();
+// }
 
-// scrollama event handlers
-function handleStepEnter(response) {
-// response = { element, direction, index }
+// // scrollama event handlers
+// function handleStepEnter(response) {
+// // response = { element, direction, index }
 
-    //clear svg
-    d3.select('svg').selectAll('*').remove();
+//     //clear svg
+//     d3.select('svg').selectAll('*').remove();
 
-    // Log step and direction
-    console.log(`Step: ${response.index}, Direction: ${response.direction}`);
+//     // Log step and direction
+//     console.log(`Step: ${response.index}, Direction: ${response.direction}`);
 
-    switch (response.index) {
-        case 0:
-            drawVis1();
-            break;
-        case 1:
-            drawVis2();
-            break;
-        case 2:
-            drawVis3();
-            break;
-        case 3:
-            drawVis4();
-            break;
-        case 4:
-            drawVis5();
-            break;
-        case 5:
-            drawVis6();
-            break;
-        case 6:
-            drawVis7();
-            break;
-        case 7:
-            drawVis8();
-            break;
-        case 8:
-            drawVis9();
-            break;
-        case 9:
-            drawVis10();
-            break;
-        case 10:
-            drawVis11();
-            break;
-        default:
-            console.log(`No visualization for step ${response.index}`);
-    }
-} 
+//     switch (response.index) {
+//         case 0:
+//             drawVis1();
+//             break;
+//         case 1:
+//             drawVis2();
+//             break;
+//         case 2:
+//             drawVis3();
+//             break;
+//         case 3:
+//             drawVis4();
+//             break;
+//         case 4:
+//             drawVis5();
+//             break;
+//         case 5:
+//             drawVis6();
+//             break;
+//         case 6:
+//             drawVis7();
+//             break;
+//         case 7:
+//             drawVis8();
+//             break;
+//         case 8:
+//             drawVis9();
+//             break;
+//         case 9:
+//             drawVis10();
+//             break;
+//         case 10:
+//             drawVis11();
+//             break;
+//         default:
+//             console.log(`No visualization for step ${response.index}`);
+//     }
+// } 
 
-function handleContainerEnter(response) {
-	// response = { direction }
+// function handleContainerEnter(response) {
+// 	// response = { direction }
 
-	// sticky the graphic
-	graphic.classed('is-fixed', true);
-	graphic.classed('is-bottom', false);
-}
+// 	// sticky the graphic
+// 	graphic.classed('is-fixed', true);
+// 	graphic.classed('is-bottom', false);
+// }
 
-function handleContainerExit(response) {
-	// response = { direction }
+// function handleContainerExit(response) {
+// 	// response = { direction }
 
-	// un-sticky the graphic, and pin to top/bottom of container
-	graphic.classed('is-fixed', false);
-	graphic.classed('is-bottom', true);
-}
+// 	// un-sticky the graphic, and pin to top/bottom of container
+// 	graphic.classed('is-fixed', false);
+// 	graphic.classed('is-bottom', true);
+// }
 
-// kick-off code to run once on load
-function init() {
-    handleResize();
-    scroller
-		.setup({
-			container: '#scroll', // our outermost scrollytelling element
-			graphic: '.scroll__graphic', // the graphic
-			text: '.scroll__text', // the step container
-			step: '.scroll__text .step', // the step elements
-			// offset: 0.1, // set the trigger to be 1/2 way down screen
-			debug: false, // display the trigger offset for testing
-		})
-		.onStepEnter(handleStepEnter)
-		.onContainerEnter(handleContainerEnter)
-		.onContainerExit(handleContainerExit);
+// // kick-off code to run once on load
+// function init() {
+//     handleResize();
+//     scroller
+// 		.setup({
+// 			container: '#scroll', // our outermost scrollytelling element
+// 			graphic: '.scroll__graphic', // the graphic
+// 			text: '.scroll__text', // the step container
+// 			step: '.scroll__text .step', // the step elements
+// 			// offset: 0.1, // set the trigger to be 1/2 way down screen
+// 			debug: false, // display the trigger offset for testing
+// 		})
+// 		.onStepEnter(handleStepEnter)
+// 		.onContainerEnter(handleContainerEnter)
+// 		.onContainerExit(handleContainerExit);
 
-	// setup resize event
-	window.addEventListener('resize', handleResize);
-    drawVis1();
-}
+// 	// setup resize event
+// 	window.addEventListener('resize', handleResize);
+//     drawVis1();
+// }
 
-// start it up
-init();
+// // start it up
+// init();
 
 async function drawVis1() {
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
@@ -1531,7 +1531,7 @@ async function drawVis12() {
 }
 
 // drawVis1();
-// drawVis2();
+drawVis2();
 // drawVis3();
 // drawVis4();
 // drawVis5();
