@@ -30,7 +30,7 @@ function handleResize() {
 			console.log('chartwidth:', chartWidth)
 			chart
 				.style('width', chartWidth + 'px')
-				.style('height', Math.floor(window.innerHeight / 1.2) + 'px');
+				.style('height', '600px');
 			// 3. tell scrollama to update new element dimensions
 			scroller.resize();
 }
@@ -38,11 +38,6 @@ function handleResize() {
 // scrollama event handlers
 function handleStepEnter(response) {
 // response = { element, direction, index }
-
-	// fade in current step
-	step.classed('is-active', function (d, i) {
-		return i === response.index;
-	})
 
     //clear svg
     d3.select('svg').selectAll('*').remove();
@@ -102,11 +97,7 @@ function handleContainerExit(response) {
 
 	// un-sticky the graphic, and pin to top/bottom of container
 	graphic.classed('is-fixed', false);
-	graphic.classed('is-bottom', response.direction === 'down');
-
-    if (response.direction === 'down') {
-        transitionExit()
-    }
+	graphic.classed('is-bottom', true);
 }
 
 // kick-off code to run once on load
@@ -118,7 +109,7 @@ function init() {
 			graphic: '.scroll__graphic', // the graphic
 			text: '.scroll__text', // the step container
 			step: '.scroll__text .step', // the step elements
-			offset: 0.1, // set the trigger to be 1/2 way down screen
+			// offset: 0.1, // set the trigger to be 1/2 way down screen
 			debug: false, // display the trigger offset for testing
 		})
 		.onStepEnter(handleStepEnter)
