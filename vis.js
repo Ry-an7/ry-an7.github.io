@@ -437,6 +437,264 @@ async function drawVis2() {
 }
 
 
+
+async function drawVis5() {
+
+    const margin = {top: 50, right: 30, bottom: 50, left: 60},
+    width = 1000 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+
+    const svg = d3.select("#vis5")
+    .append("svg") // Ensure you're creating an `svg` container
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+// Add a title to the chart
+svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", -margin.top / 2) // Position it above the chart
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .style("font-weight", "bold")
+    .text("Total Number of Teams from 1979-2006");
+
+    const data = await d3.csv("datasets/LeagueTotals.csv");
+
+    const cleanedData = data
+        .filter(d => d["Season"] && d["Number of Teams"]) 
+        .map(d => ({
+            Season: d["Season"],
+            Year: +d["Season"].split('-')[0],
+            NumberofTeams: +d["Number of Teams"]
+        }))
+        .filter(d => d.Year >= 1979 && d.Year <= 2006)
+        .sort((a, b) => a.Year - b.Year);
+
+    console.log(cleanedData);
+
+    const x = d3.scaleLinear()
+        .domain(d3.extent(cleanedData, d => d.Year))
+        .range([0, width]);
+
+    const y = d3.scaleLinear()
+        .domain([20, d3.max(cleanedData, d => d.NumberofTeams)])
+        .range([height, 0]);
+
+    svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")).ticks(d3.max(cleanedData, d => d.Year) - d3.min(cleanedData, d => d.Year)))
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", 40)
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Season");
+
+    svg.append("g")
+        .call(d3.axisLeft(y))
+        .append("text")
+        .attr("x", -height / 2)
+        .attr("y", -50)
+        .attr("transform", "rotate(-90)")
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Number of Teams");
+
+    const line = d3.line()
+        .x(d => x(d.Year))
+        .y(d => y(d.NumberofTeams));
+
+    svg.append("path")
+        .datum(cleanedData)
+        .attr("class", "line")
+        .attr("d", line);
+
+    // Tooltips
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "rgba(0, 0, 0, 0.7)")
+        .style("color", "white")
+        .style("padding", "5px")
+        .style("border-radius", "4px");
+
+    const dot = svg.append("circle")
+        .attr("r", 5)
+        .attr("fill", "black")
+        .style("visibility", "hidden");
+
+    const rects = svg.append("g")
+        .attr("fill", "none")
+        .attr("pointer-events", "all");
+
+    cleanedData.forEach(d => {
+        rects.append("rect")
+            .attr("x", x(d.Year))
+            .attr("height", height)
+            .attr("width", 5)
+            .on("mouseover", function(event) {
+                tooltip.style("visibility", "visible")
+                    .html(`<strong>Season:</strong> ${d.Season}<br><strong>Teams:</strong> ${d.NumberofTeams}`);
+
+                dot.attr("cx", x(d.Year))
+                    .attr("cy", y(d.NumberofTeams))
+                    .style("visibility", "visible");
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("top", (event.pageY + 5) + "px")
+                    .style("left", (event.pageX + 5) + "px");
+            })
+            .on("mouseout", function() {
+                tooltip.style("visibility", "hidden");
+                dot.style("visibility", "hidden");
+            });
+    });
+}
+
+async function drawVis6() {
+
+    const margin = {top: 50, right: 30, bottom: 50, left: 60},
+        width = 1000 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
+
+    const svg = d3.select("#vis6")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", -margin.top / 2)
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .style("font-weight", "bold")
+    .text("Powerplay Opportunities from the 1990-2005 Seasons");
+
+    const data = await d3.csv("datasets/LeagueTotals.csv");
+
+    const cleanedData = data
+        .filter(d => d["Season"] && d["Power Play Opportunities"])
+        .map(d => ({
+            Season: d["Season"],
+            Year: +d["Season"].split('-')[0],
+            PowerPlayOpportunities: +d["Power Play Opportunities"]
+        }))
+        .filter(d => d.Year >= 1990 && d.Year <= 2023)
+        .sort((a, b) => a.Year - b.Year);
+
+    console.log(cleanedData);
+
+    const x = d3.scaleLinear()
+        .domain(d3.extent(cleanedData, d => d.Year))
+        .range([0, width]);
+
+    const y = d3.scaleLinear()
+        .domain([4500, d3.max(cleanedData, d => d.PowerPlayOpportunities)])
+        .range([height, 0]);
+
+    svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")).ticks(cleanedData.length))
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", 40)
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Season");
+
+    svg.append("g")
+        .call(d3.axisLeft(y))
+        .append("text")
+        .attr("x", -height / 2)
+        .attr("y", -50)
+        .attr("transform", "rotate(-90)")
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .text("Powerplay Opportunities");
+
+    const line = d3.line()
+        .x(d => x(d.Year))
+        .y(d => y(d.PowerPlayOpportunities));
+
+    svg.append("path")
+        .datum(cleanedData)
+        .attr("class", "line")
+        .attr("d", line);
+
+    // Add red dots to specific years
+    const highlightYears = [2012, 2019, 2020];
+
+    highlightYears.forEach(year => {
+        const point = cleanedData.find(d => d.Year === year);
+        if (point) {
+            svg.append("circle")
+                .attr("cx", x(point.Year))
+                .attr("cy", y(point.PowerPlayOpportunities))
+                .attr("r", 5)
+                .attr("fill", "red");
+        }
+    });
+
+    // Tooltips
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "rgba(0, 0, 0, 0.7)")
+        .style("color", "white")
+        .style("padding", "5px")
+        .style("border-radius", "4px");
+
+    const dot = svg.append("circle")
+        .attr("r", 5)
+        .attr("fill", "black")
+        .style("visibility", "hidden");
+
+    const rects = svg.append("g")
+        .attr("fill", "none")
+        .attr("pointer-events", "all");
+
+    cleanedData.forEach(d => {
+        rects.append("rect")
+            .attr("x", x(d.Year))
+            .attr("height", height)
+            .attr("width", 5)
+            .on("mouseover", function(event) {
+                tooltip.style("visibility", "visible")
+                    .html(`<strong>Season:</strong> ${d.Season}<br><strong>Powerplay Opportunities:</strong> ${d.PowerPlayOpportunities}`);
+
+                dot.attr("cx", x(d.Year))
+                    .attr("cy", y(d.PowerPlayOpportunities))
+                    .style("visibility", "visible");
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("top", (event.pageY + 5) + "px")
+                    .style("left", (event.pageX + 5) + "px");
+            })
+            .on("mouseout", function() {
+                tooltip.style("visibility", "hidden");
+                dot.style("visibility", "hidden");
+            });
+    });
+}
+
+drawVis1();
+drawVis2();
+// drawVis3();
+// drawVis4();
+drawVis5();
+drawVis6();
+
+
 // async function drawVis1() {
 //     const margin = { top: 20, right: 30, bottom: 50, left: 60 },
 //         width = 1000 - margin.left - margin.right,
@@ -581,20 +839,6 @@ async function drawVis2() {
 //     });
 // }
 
-
-drawVis1();
-drawVis2();
-// drawVis3();
-// drawVis4();
-// drawVis5();
-// drawVis6();
-// drawVis7();
-// drawVis8();
-// drawVis9();
-// drawVis10();
-// drawVis11();
-// drawVis12();
-
 // Ensure refresh starts at top (so scrolly stuff doesn't get weird)
 // window.onbeforeunload = function () {
 //     window.scrollTo(0, 0);
@@ -720,7 +964,7 @@ drawVis2();
 
 
 
-
+//OLD VIS
 
 // async function drawVis1() {
 //     const margin = {top: 20, right: 30, bottom: 50, left: 60},
@@ -1209,7 +1453,7 @@ async function drawVis4() {
     });
 }
 
-async function drawVis5() {
+async function drawVis5s() {
 
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
         width = 800 - margin.left - margin.right,
@@ -1315,7 +1559,7 @@ async function drawVis5() {
     });
 }
 
-async function drawVis6() {
+async function drawVis6s() {
     
     const margin = {top: 20, right: 30, bottom: 50, left: 60},
         width = 900 - margin.left - margin.right,

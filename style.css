@@ -170,6 +170,21 @@ nav {
 .controls {
     padding-top: 3rem;
 }
+
+figure img {
+    display: block;
+    margin: 0 auto;
+}
+
+figcaption {
+    font-size: 1.1rem;
+    color: #555;
+    margin-top: 10px;
+    padding-left: 7rem;
+    font-style: italic;
+}
+
+
 /* .tooltip {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.7);
@@ -178,6 +193,7 @@ nav {
     border-radius: 4px;
     visibility: hidden;
 } */
+
 /*
 #scroll {
     position: relative;
