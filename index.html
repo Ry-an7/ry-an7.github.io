@@ -10,10 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
-    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
-    <script src="https://unpkg.com/scrollama"></script>
     <script type="module" src="vis.js"></script>
-    <script src="scrollama.min.js"></script>
 </head>
 
 <body>
@@ -94,10 +91,7 @@
                         <input type="radio" name="season-vis3" value="all" checked> All Seasons
                     </label>
                     <label>
-                        <input type="radio" name="season-vis3" value="high"> 1990-2023
-                    </label>
-                    <label>
-                        <input type="radio" name="season-vis3" value="low"> 1997-2005
+                        <input type="radio" name="season-vis3" value="low"> 1990-2025
                     </label>
                 </div>
                 <svg id="vis3" width="1000" height="600"></svg>
@@ -115,10 +109,7 @@
                         <input type="radio" name="season-vis4" value="all" checked> All Seasons
                     </label>
                     <label>
-                        <input type="radio" name="season-vis4" value="high"> 1990-2023
-                    </label>
-                    <label>
-                        <input type="radio" name="season-vis4" value="low"> 1997-2005
+                        <input type="radio" name="season-vis4" value="low"> 1995-2006
                     </label>
                 </div>
                 <svg id="vis4" width="1000" height="600"></svg>
@@ -134,16 +125,6 @@
                 <svg id="vis5" width="1000" height="600"></svg>
             </div>
         </div>
-
-        <!-- <div class="row">
-            <div class="left-column">
-                <h2>End of the Dead Puck Era</h2>
-            </div>
-            <div class="right-column">
-                <p>One major argument for the emergence of the Dead Puck Era is the NHL's rapid expansion during the 1990s and early 2000s. Before 1990, the league maintained 21 teams for a decade. However, starting in the 1991–1992 season, the NHL began adding teams almost annually. It started with one new team in 1991–1992, followed by two more in 1992–1993, and another two in 1993–1994. The league stabilized at 26 teams for five seasons before expanding again in 1998–1999. By the time the 2005 lockout ended, the NHL had grown to 30 teams. This period of 14 years saw the addition of nine teams—the largest expansion since the league grew from six to 21 teams in the late 1960s and 1970s. The rapid influx of new teams may have diluted talent, contributing to the defensive, low-scoring style that defined the Dead Puck Era.</p>
-                <svg id="vis6" width="1000" height="600"></svg>
-            </div>
-        </div> -->
 
         <div class="row">
             <div class="left-column">
@@ -171,7 +152,6 @@
                     <figcaption>Changes in Goalie Equipment</figcaption>
                 </figure>
                 <p>Rules surrounding the goaltender’s equipment were changed following the 2005 NHL lockout, with stricter regulations on the size and fit of gear. Jerseys and pads had to be more form-fitting and proportionate to the goalie’s body, ensuring a more uniform look. Leg pads were limited to a maximum width of 11 inches, while blockers were reduced from 16 inches to 15 inches. The circumference of catching gloves was also decreased, from 48 inches to 45 inches. These changes aimed to make it more difficult for goalies to control the puck, leading to more scoring opportunities. The rule changes also helped reopen the five-hole, the narrow gap between a goaltender’s legs, specifically between the pads and the body, thus creating additional space for shooters to target and score.</p>
-                <!-- <svg id="vis5" width="1000" height="600"></svg> -->
             </div>
         </div>
 
@@ -200,145 +180,5 @@
         </div>
     </div>
     </div>
-
-    
-
-    <!-- <section id='scroll'>
-        <div class='scroll__graphic'>
-            <div class='chart'>
-                <svg id="vis" width="800" height="600"></svg>
-            </div>
-        </div>
-    
-        <div class='scroll__text'>
-            <div class='step' data-step='1'>
-                <h2 class="subheader">Average number of goals scored across the entire history of the NHL.</h2>
-                <p>Exploring the season average of Goals Per Game across the whole history of the NHL, we can see that goals per game have fluctuated throughout the history of the NHL, with periods where the number of goals scored per game has been less than the average line of 3.03 goals per game. The time period which I want to focus on is the year 1990-2023.</p>
-            </div>
-            <div class='step' data-step='2'>
-                <h2 class="subheader">Narrowing the scope</h2>
-                <p>From here, we can see that there is a significant drop off in average goals scored per game from the 1992-1999 season with the drop off being almost a goal per game (0.99 goals). There was a significant rise in the 2005-2006 season from the 2003-2004 season by half a goal (0.51 goals). The average goes back down after the 2005-2006 season, but it fluctuates up and down until the 2014-2015 season where it has consistently gone up since. The 2004-2005 season was cancelled due to a labour dispute and therefore has no data.</p>
-            </div>
-            <div class='step' data-step='3'>
-                <h2 class="subheader">The Dead Puck Era</h2>
-                <p>Looking even closer, we can see that from 1997-2004 is the period where the average goals per game have been the lowest, with the 2003-2004 season having the lowest average goals per game at 2.57 goals per game. This time frame is what I identify as the Dead Puck Era. </p>
-            </div>
-            <div class='step' data-step='4'>
-                <h2 class="subheader">Total goals scored per season across the entire history of the NHL</h2>
-                <p>Looking at the overall history of league scoring, we can see that scoring is continuing to rise throughout the years, especially at the years when expansion took place (1967, 1980). There are some noticable single season drops in scoring, but those correspond to seasons where a full season was not played.</p>
-            </div>
-            <div class='step' data-step='5'>
-                <h2 class="subheader">Narrowing the scope</h2>
-                <p>Shrinking the time frame again to 1990-2023, we can see that most seasons in this range had more goals scored than the average of 6,400, but there is a significant drop of 3,354 goals between the 1993-1994 season and the 1994-1995 season. This drop off is not because of the change in number of teams, but because of another lockout that ended up having only 48 games played in the season instead of the normal 82 games.</p>
-            </div>
-            <div class='step' data-step='6'>
-                <h2 class="subheader">The Dead Puck Era</h2>
-                <p>If we look at the total number of goals scored in a season from between 1994-2005, we can see that even though there were more goals scored than the average, the number of goals scored each season was less than 7000 goals which the 1993-1994 and 2005-2006 seasons surpassed.</p>
-            </div>
-            <div class='step' data-step='7'>
-                <h2 class="subheader">Shooting Percentage</h2>
-                <p>Let's explore to see if there is any correlation between overall season shooting percentage and the Dead Puck Era. Shooting percentage is a hockey statistic that measures how efficiently a player or team converts shots into goals. A higher shooting percentage indicates greater scoring efficiency, while a lower percentage suggests difficulty in converting scoring opportunities. It is calculated by dividing the number of goals by the number of shots taken.</p>
-            </div>
-            <div class='step' data-step='8'>
-                <h2 class="subheader">Dead Puck Era</h2>
-                <p>Starting from the 1959-1960 season when shots were first tracked, there is a significant rise in shooting percentage from 1969-1981 followed by a slow descent from 1986-2015. From 2016-2024 there are signs that the shooting percentage is starting to go back up.</p>
-            </div>
-            <div class='step' data-step='9'>
-                <h2 class="subheader">Save Percentage</h2>
-                <p>The overall league save percentage from 1917-2024 seems to follow league trends in scoring. The dip in save percentage in the 80’s does correlate with the rise in shooting percentage, average goals per game, and total goals scored during that time.</p>
-            </div>
-            <div class='step' data-step='10'>
-                <h2 class="subheader">Dead Puck Era</h2>
-                <p>During the Dead Puck Era, save percentage rose from the .800 range to above .900 range, with the 2003-2004 season seeing the highest save percentage of .911. It is interesting to note the dip in save percentage from 1999-2002, but it did stay above the .800 range that was seen before the era began.</p>
-            </div>
-        </div>
-    </section>  -->
-
-    <!-- <h2 class="subtitle">Expansion</h2>
-
-    <div class="visV">
-        <svg id="vis5-1" width="1000" height="600"></svg>
-        <div class="text-below">
-            <p>
-            One major argument for the emergence of the Dead Puck Era is the NHL's rapid expansion during the 1990s and early 2000s. Before 1990, the league maintained 21 teams for a decade. However, starting in the 1991–1992 season, the NHL began adding teams almost annually. It started with one new team in 1991–1992, followed by two more in 1992–1993, and another two in 1993–1994. The league stabilized at 26 teams for five seasons before expanding again in 1998–1999. By the time the 2005 lockout ended, the NHL had grown to 30 teams. This period of 14 years saw the addition of nine teams—the largest expansion since the league grew from six to 21 teams in the late 1960s and 1970s. The rapid influx of new teams may have diluted talent, contributing to the defensive, low-scoring style that defined the Dead Puck Era.
-            </p>
-        </div>
-    </div>
-
-    <h2 class="subtitle">End of Dead Puck Era</h2>
-
-    <p class="desc">Widely regarded as the end of the Dead Puck Era, the 2005–2006 NHL season marked a turning point following the cancellation of the 2004–2005 season due to a lockout. In its return, the league introduced a sweeping set of rule changes designed to revitalize the game. These reforms aimed to increase scoring, speed up play, and enhance the overall entertainment value for fans.</p>
-
-    <h2 class="subtitle">Ice Surface</h2>
-
-    <div class="visV">
-        <figure>
-            <img src="images/2007Ice.png" alt="Image of NHL's Ice Surface After 2005 Rule Changes." width="1000" height="1000">
-            <figcaption>Image of NHL's Ice Surface After 2005 Rule Changes</figcaption>
-        </figure>
-        
-        <div class="text-below">
-            <p>
-            Several significant physical changes were made to the ice surface to increase the speed and flow of the game. The neutral zone, the area between the two blue lines, was reduced in size from 54 feet to 50 feet by moving the blue lines four feet closer to center ice. The goal lines, positioned in line with the net, were shifted two feet closer to the end boards, leaving 11 feet of space between the goal line and the boards. Additionally, a trapezoid-shaped area was introduced behind each net to restrict where goaltenders could handle the puck, limiting them to this designated zone instead of the entire area behind the goal line.
-            </p>
-        </div>
-    </div>
-
-    <h2 class="subtitle">Rule Changes</h2>
-
-    <div class="visV">
-        <figure>
-            <img src="images/Offside.png" alt="Diagram of Offside and Onside after rule change." width="1000" height="1000">
-            <figcaption>Diagram of Offside and Onside After Rule Changes</figcaption>
-        </figure>
-        
-        <div class="text-below">
-            <p>
-            In addition to physical changes to the ice surface, several key rule modifications were introduced to enhance offence and scoring. One of the most impactful changes was the elimination of the two-line pass rule, which had previously prohibited passes that crossed both the center red line and the opposing blue line. By removing this restriction, teams could make quicker, longer passes, speeding up the transition to offense. Another important change was the reinstatement of the "tag-up" offside rule, which allowed players to re-enter the attacking zone without stopping play if they had previously been offside, as long as they tagged up (i.e., re-established themselves onside). Previously, a whistle would blow immediately if a player crossed the blue line ahead of the puck.
-            </p>
-        </div>
-    </div>
-
-    <h2 class="subtitle">Goaltenders</h2>
-
-    <div class="visV">
-        <figure>
-            <img src="images/Offside.png" alt="Diagram of Offside and Onside after rule change." width="1000" height="1000">
-            <figcaption>Diagram of Offside and Onside After Rule Changes</figcaption>
-        </figure>
-        
-        <div class="text-below">
-            <p>
-            Rules surrounding the goaltender’s equipment were changed following the 2005 NHL lockout, with stricter regulations on the size and fit of gear. Jerseys and pads had to be more form-fitting and proportionate to the goalie’s body, ensuring a more uniform look. Leg pads were limited to a maximum width of 11 inches, while blockers were reduced from 16 inches to 15 inches. The circumference of catching gloves was also decreased, from 48 inches to 45 inches. These changes aimed to make it more difficult for goalies to control the puck, leading to more scoring opportunities. The rule changes also helped reopen the five-hole, the narrow gap between a goaltender’s legs, specifically between the pads and the body, thus creating additional space for shooters to target and score.
-            </p>
-        </div>
-    </div>
-
-    <h2 class="subtitle">Penalty Changes</h2>
-
-    <p class="desc">The final significant change following the 2005 lockout was the crackdown on obstruction penalties, specifically interference, hooking, holding, tripping, and stick fouls. Prior to the rule changes, penalties for these tactics were either rarely called or completely overlooked, slowing the game and reducing scoring opportunities. With stricter enforcement, the goal was to accelerate the pace of the game and encourage more fluid, continuous play. The enforcement of these penalties also introduced the embellishment rule, which penalized players attempting to fake fouls to draw calls. These changes significantly improved the flow of the game, encouraging more open play and helping to restore excitement.</p>
-
-    <div class="visV">
-        <svg id="vis6-1" width="1000" height="600"></svg>
-        <div class="text-below">
-            <p>
-                When examining total power play opportunities from 1990 to 2005, several intriguing trends emerge. The crackdown on obstruction penalties led to a significant spike in opportunities, increasing by approximately 4,000 compared to the previous season. During the Dead Puck Era (1997–2004), power play opportunities consistently remained below 11,000, with only one exception. This suggests that the lack of enforcement of obstruction penalties likely contributed to the characteristics of the Dead Puck Era.
-                After the 2005–2006 season, power play opportunities experienced a sharp decline, continuing steadily downward until the 2018–2019 season. Excluding the 2012–2013, 2019–2020, and 2020–2021 seasons—marked in red due to reduced games caused by a lockout and the COVID-19 pandemic—it is clear that power play opportunities have generally declined since 2005.
-            </p>
-        </div>
-    </div>
-
-    <h2 class="subtitle">Conclusion</h2>
-
-    <div class="blur-container">
-        <img src="images/Slapshot.jpg" alt="A Blurred Image of a Player Taking a Slapshot" width="1800" height="1000">
-        <div class="intro-text">
-            <p>
-            The Dead Puck Era (1997-2004) represents a defining chapter in the NHL's history, marked by a decline in scoring that prompted significant changes in how the game was played and regulated. The defensive systems of the time and lenient enforcement of obstruction penalties further limited scoring opportunities. The increasing size of goaltending equipment also played a key role in tipping the balance in favor of defensive play.
-            This era emphasized the delicate balance the NHL must uphold between offense and defense to sustain the game's excitement and appeal. Scoring is the cornerstone of hockey, driving its thrill and entertainment, and the league must ensure a consistently high level of scoring to keep fans engaged and invested in the sport.
-            </p>
-        </div>
-    </div> -->
-
 </body>
 </html>
