@@ -295,15 +295,16 @@ async function drawVis2() {
     // Tooltip element
     const tooltip = d3.select("body").append("div")
         .style("position", "absolute")
-        .style("background-color", "white")
+        .style("background-color", "rgba(0, 0, 0, 0.7)")
         .style("border", "1px solid #ccc")
         .style("padding", "5px")
-        .style("border-radius", "5px")
+        .style("border-radius", "4px")
         .style("box-shadow", "0px 0px 5px #aaa")
         .style("visibility", "hidden")
-        .style("font-size", "12px");
+        .style("font-size", "12px")
+        .style("color", "white");
 
-    // Circles for points
+
     const circles = svg.selectAll(".dot")
         .data(cleanedData)
         .enter()
@@ -371,7 +372,7 @@ async function drawVis2() {
         } else if (value === "low") {
             filteredData = cleanedData.filter(d => d.Season >= 1997 && d.Season <= 2005);
             xDomain = [1997, 2005];
-            yDomain = [3600, 7600];
+            yDomain = [5000, 7600];
         }
 
         x.domain(xDomain);
@@ -445,16 +446,15 @@ async function drawVis5() {
     height = 600 - margin.top - margin.bottom;
 
     const svg = d3.select("#vis5")
-    .append("svg") // Ensure you're creating an `svg` container
+    .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
-// Add a title to the chart
 svg.append("text")
     .attr("x", width / 2)
-    .attr("y", -margin.top / 2) // Position it above the chart
+    .attr("y", -margin.top / 2)
     .attr("text-anchor", "middle")
     .style("font-size", "16px")
     .style("font-weight", "bold")
