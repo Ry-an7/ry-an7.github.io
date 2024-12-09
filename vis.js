@@ -196,7 +196,7 @@ async function drawVis1() {
             })
             .on("mouseout", function () {
                 d3.select(this)
-                    .attr("r", 5)
+                    .attr("r", 3)
                     .attr("fill", "steelblue");
                 tooltip.style("visibility", "hidden");
             });
@@ -322,7 +322,7 @@ async function drawVis2() {
         })
         .on("mouseout", function () {
             d3.select(this)
-                .attr("r", 4)
+                .attr("r", 3)
                 .attr("fill", "steelblue");
             tooltip.style("visibility", "hidden");
         });
@@ -393,7 +393,7 @@ async function drawVis2() {
             .attr("class", "dot")
             .attr("cx", d => x(d.Season))
             .attr("cy", d => y(d.SeasonGoals))
-            .attr("r", 4)
+            .attr("r", 3)
             .attr("fill", "steelblue")
             .on("mouseover", function (event, d) {
                 d3.select(this)
@@ -410,7 +410,7 @@ async function drawVis2() {
             })
             .on("mouseout", function () {
                 d3.select(this)
-                    .attr("r", 4)
+                    .attr("r", 3)
                     .attr("fill", "steelblue");
                 tooltip.style("visibility", "hidden");
             });
@@ -537,7 +537,7 @@ async function drawVis3() {
         })
         .on("mouseout", function () {
             d3.select(this)
-                .attr("r", 4)
+                .attr("r", 3)
                 .attr("fill", "steelblue");
             tooltip.style("visibility", "hidden");
         });
@@ -604,7 +604,7 @@ async function drawVis3() {
             .attr("class", "dot")
             .attr("cx", d => x(d.Season))
             .attr("cy", d => y(d.ShootingPercentage))
-            .attr("r", 4)
+            .attr("r", 3)
             .attr("fill", "steelblue")
             .on("mouseover", function (event, d) {
                 d3.select(this)
@@ -621,7 +621,7 @@ async function drawVis3() {
             })
             .on("mouseout", function () {
                 d3.select(this)
-                    .attr("r", 4)
+                    .attr("r", 3)
                     .attr("fill", "steelblue");
                 tooltip.style("visibility", "hidden");
             });
@@ -748,7 +748,7 @@ async function drawVis4() {
         })
         .on("mouseout", function () {
             d3.select(this)
-                .attr("r", 4)
+                .attr("r", 3)
                 .attr("fill", "steelblue");
             tooltip.style("visibility", "hidden");
         });
@@ -815,7 +815,7 @@ async function drawVis4() {
             .attr("class", "dot")
             .attr("cx", d => x(d.Season))
             .attr("cy", d => y(d.SavePercentage))
-            .attr("r", 4)
+            .attr("r", 3)
             .attr("fill", "steelblue")
             .on("mouseover", function (event, d) {
                 d3.select(this)
@@ -832,7 +832,7 @@ async function drawVis4() {
             })
             .on("mouseout", function () {
                 d3.select(this)
-                    .attr("r", 4)
+                    .attr("r", 3)
                     .attr("fill", "steelblue");
                 tooltip.style("visibility", "hidden");
             });
@@ -944,13 +944,13 @@ svg.append("text")
         .attr("class", "dot")
         .attr("cx", d => x(d.Year))
         .attr("cy", d => y(d.NumberofTeams))
-        .attr("r", 5) // Initial radius
+        .attr("r", 3) // Initial radius
         .attr("fill", "black") // Initial color
         .on("mouseover", function (event, d) {
             // Change size and color on hover
             d3.select(this)
                 .transition().duration(100)
-                .attr("r", 8)
+                .attr("r", 5)
                 .attr("fill", "orange");
 
             // Show tooltip
@@ -964,7 +964,7 @@ svg.append("text")
         .on("mouseout", function () {
             d3.select(this)
                 .transition().duration(100)
-                .attr("r", 5)
+                .attr("r", 3)
                 .attr("fill", "black");
 
             tooltip.style("visibility", "hidden");
@@ -1054,7 +1054,7 @@ svg.append("text")
             svg.append("circle")
                 .attr("cx", x(point.Year))
                 .attr("cy", y(point.PowerPlayOpportunities))
-                .attr("r", 5)
+                .attr("r", 3)
                 .attr("fill", "red")
                 .attr("class", "highlight-dot");
         }
@@ -1077,12 +1077,12 @@ svg.append("text")
         .attr("class", "dot")
         .attr("cx", d => x(d.Year))
         .attr("cy", d => y(d.PowerPlayOpportunities))
-        .attr("r", 5)
+        .attr("r", 3)
         .attr("fill", d => highlightYears.includes(d.Year) ? "red" : "black")
         .on("mouseover", function (event, d) {
             d3.select(this)
                 .transition().duration(100)
-                .attr("r", 8)
+                .attr("r", 5)
                 .attr("fill", d => highlightYears.includes(d.Year) ? "orange" : "orange");
 
             tooltip.style("visibility", "visible")
@@ -1095,7 +1095,7 @@ svg.append("text")
         .on("mouseout", function (event, d) {
             d3.select(this)
                 .transition().duration(100)
-                .attr("r", 5)
+                .attr("r", 3)
                 .attr("fill", d => highlightYears.includes(d.Year) ? "red" : "black"); // Reset color to original (red for highlighted, black otherwise)
 
             tooltip.style("visibility", "hidden");
