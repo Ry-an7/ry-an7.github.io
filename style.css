@@ -6,15 +6,11 @@ body, html {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow: auto;
+    height: 100%;
 }
 
 body {
     font-size: 1rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    position: relative;
 }
 
 body:before {
@@ -155,7 +151,7 @@ nav {
     flex: 1;
     background-color: #1b1b1b;
     color: white;
-    padding: 20px;
+    padding-top: 20px;
     display: flex;
     justify-content: top;
     align-items: center;
@@ -193,17 +189,41 @@ nav {
     padding-top: 3rem;
 }
 
+figure {
+    margin: 0;
+}
+
 figure img {
     display: block;
     margin: 0 auto;
+    max-width: 100%;
+    height: auto;
 }
 
 figcaption {
     font-size: 1.1rem;
     color: #555;
-    margin-top: 10px;
+    
+    margin-bottom: 10px;
     padding-left: 7rem;
     font-style: italic;
+}
+
+footer {
+    text-align: center;
+}
+.about-container{
+    margin: 0;
+    margin: 3rem 20rem;
+}
+
+.about-container p {
+    width: 60vw;
+    font-size: 1.1rem;
+}
+
+.about-container li {
+    font-size: 1.1rem;
 }
 
 /* media queries */
@@ -220,10 +240,16 @@ figcaption {
     .title {
         padding-right: 0;
     }
+
+    
 }
 
 @media (max-width: 1260px) {
     nav{
         flex-direction: column;
+    }
+
+    figcaption {
+        padding-left: 0;
     }
 }
