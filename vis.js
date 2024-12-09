@@ -937,37 +937,38 @@ svg.append("text")
         .style("padding", "5px")
         .style("border-radius", "4px");
 
-    const dot = svg.append("circle")
-        .attr("r", 5)
-        .attr("fill", "black")
-        .style("visibility", "hidden");
+    svg.selectAll(".dot")
+        .data(cleanedData)
+        .enter()
+        .append("circle")
+        .attr("class", "dot")
+        .attr("cx", d => x(d.Year))
+        .attr("cy", d => y(d.NumberofTeams))
+        .attr("r", 5) // Initial radius
+        .attr("fill", "black") // Initial color
+        .on("mouseover", function (event, d) {
+            // Change size and color on hover
+            d3.select(this)
+                .transition().duration(100)
+                .attr("r", 8)
+                .attr("fill", "orange");
 
-    const rects = svg.append("g")
-        .attr("fill", "none")
-        .attr("pointer-events", "all");
+            // Show tooltip
+            tooltip.style("visibility", "visible")
+                .html(`<strong>Season:</strong> ${d.Season}<br><strong>Teams:</strong> ${d.NumberofTeams}`);
+        })
+        .on("mousemove", function (event) {
+            tooltip.style("top", (event.pageY - 10) + "px")
+                .style("left", (event.pageX + 10) + "px");
+        })
+        .on("mouseout", function () {
+            d3.select(this)
+                .transition().duration(100)
+                .attr("r", 5)
+                .attr("fill", "black");
 
-    cleanedData.forEach(d => {
-        rects.append("rect")
-            .attr("x", x(d.Year))
-            .attr("height", height)
-            .attr("width", 5)
-            .on("mouseover", function(event) {
-                tooltip.style("visibility", "visible")
-                    .html(`<strong>Season:</strong> ${d.Season}<br><strong>Teams:</strong> ${d.NumberofTeams}`);
-
-                dot.attr("cx", x(d.Year))
-                    .attr("cy", y(d.NumberofTeams))
-                    .style("visibility", "visible");
-            })
-            .on("mousemove", function(event) {
-                tooltip.style("top", (event.pageY + 5) + "px")
-                    .style("left", (event.pageX + 5) + "px");
-            })
-            .on("mouseout", function() {
-                tooltip.style("visibility", "hidden");
-                dot.style("visibility", "hidden");
-            });
-    });
+            tooltip.style("visibility", "hidden");
+        });
 }
 
 async function drawVis6() {
@@ -1044,8 +1045,8 @@ svg.append("text")
         .attr("class", "line")
         .attr("d", line);
 
-    // Add red dots to specific years
-    const highlightYears = [2012, 2019, 2020];
+    // red dots
+    const highlightYears = [1994, 2012, 2019, 2020];
 
     highlightYears.forEach(year => {
         const point = cleanedData.find(d => d.Year === year);
@@ -1054,7 +1055,8 @@ svg.append("text")
                 .attr("cx", x(point.Year))
                 .attr("cy", y(point.PowerPlayOpportunities))
                 .attr("r", 5)
-                .attr("fill", "red");
+                .attr("fill", "red")
+                .attr("class", "highlight-dot");
         }
     });
 
@@ -1068,37 +1070,36 @@ svg.append("text")
         .style("padding", "5px")
         .style("border-radius", "4px");
 
-    const dot = svg.append("circle")
+    svg.selectAll(".dot")
+        .data(cleanedData)
+        .enter()
+        .append("circle")
+        .attr("class", "dot")
+        .attr("cx", d => x(d.Year))
+        .attr("cy", d => y(d.PowerPlayOpportunities))
         .attr("r", 5)
-        .attr("fill", "black")
-        .style("visibility", "hidden");
+        .attr("fill", d => highlightYears.includes(d.Year) ? "red" : "black")
+        .on("mouseover", function (event, d) {
+            d3.select(this)
+                .transition().duration(100)
+                .attr("r", 8)
+                .attr("fill", d => highlightYears.includes(d.Year) ? "orange" : "orange");
 
-    const rects = svg.append("g")
-        .attr("fill", "none")
-        .attr("pointer-events", "all");
+            tooltip.style("visibility", "visible")
+                .html(`<strong>Season:</strong> ${d.Season}<br><strong>Teams:</strong> ${d.PowerPlayOpportunities}`);
+        })
+        .on("mousemove", function (event) {
+            tooltip.style("top", (event.pageY - 10) + "px")
+                .style("left", (event.pageX + 10) + "px");
+        })
+        .on("mouseout", function (event, d) {
+            d3.select(this)
+                .transition().duration(100)
+                .attr("r", 5)
+                .attr("fill", d => highlightYears.includes(d.Year) ? "red" : "black"); // Reset color to original (red for highlighted, black otherwise)
 
-    cleanedData.forEach(d => {
-        rects.append("rect")
-            .attr("x", x(d.Year))
-            .attr("height", height)
-            .attr("width", 5)
-            .on("mouseover", function(event) {
-                tooltip.style("visibility", "visible")
-                    .html(`<strong>Season:</strong> ${d.Season}<br><strong>Powerplay Opportunities:</strong> ${d.PowerPlayOpportunities}`);
-
-                dot.attr("cx", x(d.Year))
-                    .attr("cy", y(d.PowerPlayOpportunities))
-                    .style("visibility", "visible");
-            })
-            .on("mousemove", function(event) {
-                tooltip.style("top", (event.pageY + 5) + "px")
-                    .style("left", (event.pageX + 5) + "px");
-            })
-            .on("mouseout", function() {
-                tooltip.style("visibility", "hidden");
-                dot.style("visibility", "hidden");
-            });
-    });
+            tooltip.style("visibility", "hidden");
+        });
 }
 
 drawVis1();

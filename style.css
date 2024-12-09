@@ -23,11 +23,13 @@ nav {
     min-height: 1rem;
     background-color: #000;
 }
+
 .title {
     display: flex;
     align-items: center;
     letter-spacing: 2px;
     font-size: 1.25rem;
+    padding-right: 45rem;
 }
 
 #logo {
@@ -58,7 +60,7 @@ nav {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    padding-left: 0rem;
+    padding-left: 0;
 }
 
 .nav-menu li {
@@ -182,4 +184,26 @@ figcaption {
     margin-top: 10px;
     padding-left: 7rem;
     font-style: italic;
+}
+
+/* media queries */
+
+@media (max-width: 1842px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .left-column, .right-column {
+        flex: none;
+    }
+
+    .title {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 1260px) {
+    nav{
+        flex-direction: column;
+    }
 }
