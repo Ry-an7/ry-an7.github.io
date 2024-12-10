@@ -3,7 +3,7 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 console.log(d3);
 
 async function drawVis1() {
-    const margin = { top: 20, right: 30, bottom: 50, left: 60 },
+    const margin = { top: 50, right: 30, bottom: 50, left: 60 },
         width = 1000 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
@@ -13,6 +13,14 @@ async function drawVis1() {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
+    
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", -margin.top / 2)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("font-weight", "bold")
+        .text("Average Goals Per Game");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
@@ -217,7 +225,7 @@ async function drawVis1() {
 }
 
 async function drawVis2() { 
-    const margin = { top: 20, right: 30, bottom: 50, left: 60 },
+    const margin = { top: 50, right: 30, bottom: 50, left: 60 },
         width = 1000 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
@@ -227,6 +235,14 @@ async function drawVis2() {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
+    
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", -margin.top / 2)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("font-weight", "bold")
+        .text("Goals Scored Per Season");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
@@ -431,7 +447,7 @@ async function drawVis2() {
 }
 
 async function drawVis3() { 
-    const margin = { top: 20, right: 30, bottom: 50, left: 60 },
+    const margin = { top: 50, right: 30, bottom: 50, left: 60 },
         width = 1000 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
@@ -441,6 +457,14 @@ async function drawVis3() {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", -margin.top / 2)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("font-weight", "bold")
+        .text("Shooting Percentage");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
@@ -642,7 +666,7 @@ async function drawVis3() {
 }
 
 async function drawVis4() { 
-    const margin = { top: 20, right: 30, bottom: 50, left: 60 },
+    const margin = { top: 50, right: 30, bottom: 50, left: 60 },
         width = 1000 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
@@ -652,6 +676,14 @@ async function drawVis4() {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", -margin.top / 2)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("font-weight", "bold")
+        .text("Save Percentage");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
