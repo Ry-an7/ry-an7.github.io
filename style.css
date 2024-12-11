@@ -14,19 +14,6 @@ body {
     font-size: 1rem;
 }
 
-/* body:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #003366;
-    background-image: url(http://www.transparenttextures.com/patterns/nice-snow.png);
-    opacity: 0.3;
-    z-index: -1;
-} */
-
 nav {
     display: flex;
     flex-wrap: wrap;
@@ -204,10 +191,14 @@ figure img {
 figcaption {
     font-size: 1.1rem;
     color: #555;
-    
     margin-bottom: 10px;
     padding-left: 7rem;
     font-style: italic;
+}
+
+#goalieFigC {
+    padding-left: 23rem;
+    padding-top: 1rem;
 }
 
 footer {
@@ -230,6 +221,7 @@ footer {
 /* media queries */
 
 @media (max-width: 1842px) {
+    
     .row {
         flex-direction: column;
     }
@@ -238,14 +230,18 @@ footer {
         flex: none;
     }
 
+    .left-column {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
     .title {
         padding-right: 0;
     }
-
-    
 }
 
 @media (max-width: 1260px) {
+    
     nav{
         flex-direction: column;
     }
@@ -253,4 +249,26 @@ footer {
     figcaption {
         padding-left: 0;
     }
+
+    #goalieFigC {
+        padding-left: 17rem;
+    }
+
+    .content-container {
+        margin: 3rem 5rem;
+    }
+
+    .intro_bod {
+        margin-right: 5rem;
+        margin-left: 5rem;
+    }
+
+    .intro__dek {
+        margin-left: 5rem;
+    }
+
+    .intro__hed {
+        margin-left: 5rem;
+    }
+
 }
