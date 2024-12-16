@@ -80,7 +80,7 @@ async function drawVis1() {
         .attr("stroke", "steelblue")
         .attr("stroke-width", 2);
 
-    // Tooltip element
+    // Tooltips
     const tooltip = d3.select("body").append("div")
     .style("position", "absolute")
     .style("background-color", "rgba(0, 0, 0, 0.7)")
@@ -302,7 +302,7 @@ async function drawVis2() {
         .attr("stroke", "steelblue")
         .attr("stroke-width", 2);
 
-    // Tooltip element
+    // Tooltips
     const tooltip = d3.select("body").append("div")
         .style("position", "absolute")
         .style("background-color", "rgba(0, 0, 0, 0.7)")
@@ -525,7 +525,7 @@ async function drawVis3() {
         .attr("stroke", "steelblue")
         .attr("stroke-width", 2);
 
-    // Tooltip element
+    // Tooltips
     const tooltip = d3.select("body").append("div")
         .style("position", "absolute")
         .style("background-color", "rgba(0, 0, 0, 0.7)")
@@ -744,7 +744,7 @@ async function drawVis4() {
         .attr("stroke", "steelblue")
         .attr("stroke-width", 2);
 
-    // Tooltip element
+    // Tooltips
     const tooltip = d3.select("body").append("div")
         .style("position", "absolute")
         .style("background-color", "rgba(0, 0, 0, 0.7)")
@@ -1125,7 +1125,7 @@ svg.append("text")
             d3.select(this)
                 .transition().duration(100)
                 .attr("r", 4)
-                .attr("fill", d => highlightYears.includes(d.Year) ? "red" : "#386890"); // Reset color to original (red for highlighted, black otherwise)
+                .attr("fill", d => highlightYears.includes(d.Year) ? "red" : "#386890");
 
             tooltip.style("visibility", "hidden");
         });
