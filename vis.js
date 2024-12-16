@@ -322,7 +322,7 @@ async function drawVis2() {
         .attr("cx", d => x(d.Season))
         .attr("cy", d => y(d.SeasonGoals))
         .attr("r", 4)
-        .attr("fill", "#386890")
+        .attr("fill", d => (d.Season >= 1966 && d.Season <= 1982 ? "#228B22" : "#386890"))
         .on("mouseover", function (event, d) {
             d3.select(this)
                 .attr("r", 5)
@@ -339,7 +339,7 @@ async function drawVis2() {
         .on("mouseout", function () {
             d3.select(this)
                 .attr("r", 4)
-                .attr("fill", "#386890");
+                .attr("fill", d => (d.Season >= 1966 && d.Season <= 1982 ? "#228B22" : "#386890"))
             tooltip.style("visibility", "hidden");
         });
 
@@ -410,7 +410,7 @@ async function drawVis2() {
             .attr("cx", d => x(d.Season))
             .attr("cy", d => y(d.SeasonGoals))
             .attr("r", 4)
-            .attr("fill", "#386890")
+            .attr("fill", d => (d.Season >= 1966 && d.Season <= 1982 ? "#228B22" : "#386890"))
             .on("mouseover", function (event, d) {
                 d3.select(this)
                     .attr("r", 5)
@@ -427,7 +427,7 @@ async function drawVis2() {
             .on("mouseout", function () {
                 d3.select(this)
                     .attr("r", 4)
-                    .attr("fill", "#386890");
+                    .attr("fill", d => (d.Season >= 1966 && d.Season <= 1982 ? "#228B22" : "#386890"))
                 tooltip.style("visibility", "hidden");
             });
 
@@ -545,7 +545,11 @@ async function drawVis3() {
         .attr("cx", d => x(d.Season))
         .attr("cy", d => y(d.ShootingPercentage))
         .attr("r", 4)
-        .attr("fill", "#386890")
+        .attr("fill", d => {
+            if (d.Season >= 1969 && d.Season <= 1981) return "#228B22";
+            if (d.Season >= 1986 && d.Season <= 2000) return "#DC143C";
+            return "#386890";                                           
+        })
         .on("mouseover", function (event, d) {
             d3.select(this)
                 .attr("r", 5)
@@ -562,7 +566,11 @@ async function drawVis3() {
         .on("mouseout", function () {
             d3.select(this)
                 .attr("r", 4)
-                .attr("fill", "#386890");
+                .attr("fill", d => {
+                    if (d.Season >= 1969 && d.Season <= 1981) return "#228B22";
+                    if (d.Season >= 1986 && d.Season <= 2000) return "#DC143C";
+                    return "#386890";                                          
+                })
             tooltip.style("visibility", "hidden");
         });
 
@@ -629,7 +637,11 @@ async function drawVis3() {
             .attr("cx", d => x(d.Season))
             .attr("cy", d => y(d.ShootingPercentage))
             .attr("r", 4)
-            .attr("fill", "steelblue")
+            .attr("fill", d => {
+                if (d.Season >= 1969 && d.Season <= 1981) return "#228B22";
+                if (d.Season >= 1986 && d.Season <= 2000) return "#DC143C";
+                return "#386890";                                           
+            })
             .on("mouseover", function (event, d) {
                 d3.select(this)
                     .attr("r", 5)
@@ -646,7 +658,11 @@ async function drawVis3() {
             .on("mouseout", function () {
                 d3.select(this)
                     .attr("r", 4)
-                    .attr("fill", "#386890");
+                    .attr("fill", d => {
+                        if (d.Season >= 1969 && d.Season <= 1981) return "#228B22";
+                        if (d.Season >= 1986 && d.Season <= 2000) return "#DC143C";
+                        return "#386890";                                           
+                    })
                 tooltip.style("visibility", "hidden");
             });
 
@@ -764,7 +780,7 @@ async function drawVis4() {
         .attr("cx", d => x(d.Season))
         .attr("cy", d => y(d.SavePercentage))
         .attr("r", 4)
-        .attr("fill", "#386890")
+        .attr("fill", d => (d.Season >= 1969 && d.Season <= 1981 ? "#DC143C" : "#386890"))
         .on("mouseover", function (event, d) {
             d3.select(this)
                 .attr("r", 5)
@@ -781,7 +797,7 @@ async function drawVis4() {
         .on("mouseout", function () {
             d3.select(this)
                 .attr("r", 4)
-                .attr("fill", "#386890");
+                .attr("fill", d => (d.Season >= 1969 && d.Season <= 1981 ? "#DC143C" : "#386890"))
             tooltip.style("visibility", "hidden");
         });
 
@@ -848,7 +864,7 @@ async function drawVis4() {
             .attr("cx", d => x(d.Season))
             .attr("cy", d => y(d.SavePercentage))
             .attr("r", 4)
-            .attr("fill", "#386890")
+            .attr("fill", d => (d.Season >= 1969 && d.Season <= 1981 ? "#DC143C" : "#386890"))
             .on("mouseover", function (event, d) {
                 d3.select(this)
                     .attr("r", 5)
@@ -865,7 +881,7 @@ async function drawVis4() {
             .on("mouseout", function () {
                 d3.select(this)
                     .attr("r", 4)
-                    .attr("fill", "#386890");
+                    .attr("fill", d => (d.Season >= 1969 && d.Season <= 1981 ? "#DC143C" : "#386890"))
                 tooltip.style("visibility", "hidden");
             });
 
@@ -1001,25 +1017,24 @@ svg.append("text")
 }
 
 async function drawVis6() {
-
     const margin = {top: 50, right: 30, bottom: 50, left: 60},
         width = 1000 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
     const svg = d3.select("#vis6")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
-svg.append("text")
-    .attr("x", width / 2)
-    .attr("y", -margin.top / 2)
-    .attr("text-anchor", "middle")
-    .style("font-size", "16px")
-    .style("font-weight", "bold")
-    .text("Powerplay Opportunities from the 1990-2005 Seasons");
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", -margin.top / 2)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("font-weight", "bold")
+        .text("Powerplay Opportunities from the 1990-2005 Seasons");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
@@ -1074,21 +1089,6 @@ svg.append("text")
         .attr("class", "line")
         .attr("d", line);
 
-    // red dots
-    const highlightYears = [1994, 2012, 2019, 2020];
-
-    highlightYears.forEach(year => {
-        const point = cleanedData.find(d => d.Year === year);
-        if (point) {
-            svg.append("circle")
-                .attr("cx", x(point.Year))
-                .attr("cy", y(point.PowerPlayOpportunities))
-                .attr("r", 4)
-                .attr("fill", "red")
-                .attr("class", "highlight-dot");
-        }
-    });
-
     // Tooltips
     const tooltip = d3.select("body").append("div")
         .attr("class", "tooltip")
@@ -1107,15 +1107,23 @@ svg.append("text")
         .attr("cx", d => x(d.Year))
         .attr("cy", d => y(d.PowerPlayOpportunities))
         .attr("r", 4)
-        .attr("fill", d => highlightYears.includes(d.Year) ? "red" : "#386890")
+        .attr("fill", d => {
+            if ([1994, 2012, 2019, 2020].includes(d.Year)) {
+                return "#DC143C";
+            }
+            else if (d3.range(1997, 2006).includes(d.Year)) {
+                return "#800020";
+            }
+            return "#386890";
+        })
         .on("mouseover", function (event, d) {
             d3.select(this)
                 .transition().duration(100)
                 .attr("r", 5)
-                .attr("fill", d => highlightYears.includes(d.Year) ? "orange" : "orange");
+                .attr("fill", "orange");
 
             tooltip.style("visibility", "visible")
-                .html(`<strong>Season:</strong> ${d.Season}<br><strong>Teams:</strong> ${d.PowerPlayOpportunities}`);
+                .html(`<strong>Season:</strong> ${d.Season}<br><strong>Powerplay Opportunities:</strong> ${d.PowerPlayOpportunities}`);
         })
         .on("mousemove", function (event) {
             tooltip.style("top", (event.pageY - 10) + "px")
@@ -1125,11 +1133,16 @@ svg.append("text")
             d3.select(this)
                 .transition().duration(100)
                 .attr("r", 4)
-                .attr("fill", d => highlightYears.includes(d.Year) ? "red" : "#386890");
+                .attr("fill", d => {
+                    if ([1994, 2012, 2019, 2020].includes(d.Year)) return "#DC143C";
+                    if (d3.range(1997, 2006).includes(d.Year)) return "#800020";
+                    return "#386890";
+                });
 
             tooltip.style("visibility", "hidden");
         });
 }
+
 
 drawVis1();
 drawVis2();
