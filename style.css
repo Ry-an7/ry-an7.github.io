@@ -103,7 +103,8 @@ nav {
 }
 
 .intro__dek {
-    font-size: 1.25rem;
+    font-style: italic;
+    font-size: 1.35rem;
     margin-bottom: 1rem;
     margin-left: 20rem;
 }

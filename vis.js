@@ -188,7 +188,12 @@ async function drawVis1() {
             .attr("cx", d => x(d.Season))
             .attr("cy", d => y(d.AverageGoalsPerGame))
             .attr("r", 4)
-            .attr("fill", "#386890")
+            .attr("fill", d => {
+                if (value === "high" && d.Season >= 1992 && d.Season <= 1999) {
+                    return "#DC143C";
+                }
+                return "#386890";
+            })
             .on("mouseover", function (event, d) {
                 d3.select(this)
                     .attr("r", 5)
@@ -205,7 +210,12 @@ async function drawVis1() {
             .on("mouseout", function () {
                 d3.select(this)
                     .attr("r", 4)
-                    .attr("fill", "#386890");
+                    .attr("fill", d => {
+                        if (value === "high" && d.Season >= 1992 && d.Season <= 1999) {
+                            return "#DC143C";
+                        }
+                        return "#386890";
+                    })
                 tooltip.style("visibility", "hidden");
             });
 
@@ -546,9 +556,9 @@ async function drawVis3() {
         .attr("cy", d => y(d.ShootingPercentage))
         .attr("r", 4)
         .attr("fill", d => {
-            if (d.Season >= 1969 && d.Season <= 1981) return "#228B22";
-            if (d.Season >= 1986 && d.Season <= 2000) return "#DC143C";
-            return "#386890";                                           
+            if (d.Season >= 1969 && d.Season <= 1981) return "#228B22"; //green
+            if (d.Season >= 1986 && d.Season <= 2000) return "#DC143C"; //red
+            return "#386890";                                           //blue
         })
         .on("mouseover", function (event, d) {
             d3.select(this)
