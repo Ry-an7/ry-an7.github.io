@@ -730,7 +730,7 @@ async function drawVis4() {
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("font-weight", "bold")
-        .text("Drop in Save Percentages Aligned with Rise in Scoring");
+        .text("Drop in Save Percentages Aligns with Rise in Scoring");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
@@ -864,7 +864,7 @@ async function drawVis4() {
             xDomain = [1959, 2025];
             yDomain = [0.865, d3.max(filteredData, d => d.SavePercentage)];
             svg.select(".chart-title")
-                .text("Drop in Save Percentages Aligned with Rise in Scoring");
+                .text("Drop in Save Percentages Aligns with Rise in Scoring");
         } else if (value === "low") {
             filteredData = cleanedData.filter(d => d.Season >= 1995 && d.Season <= 2006);
             xDomain = [1995, 2006];
