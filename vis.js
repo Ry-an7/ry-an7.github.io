@@ -254,12 +254,13 @@ async function drawVis2() {
         .attr("transform", `translate(${margin.left},${margin.top})`);
     
     svg.append("text")
+        .attr("class", "chart-title")
         .attr("x", width / 2)
         .attr("y", -margin.top / 2)
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("font-weight", "bold")
-        .text("Goals Scored Per Season");
+        .text("Goals per Season Significanty Increased From 1966-1982");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
@@ -391,14 +392,20 @@ async function drawVis2() {
             filteredData = cleanedData;
             xDomain = d3.extent(cleanedData, d => d.Season);
             yDomain = [1.2, d3.max(cleanedData, d => d.SeasonGoals)];
+            svg.select(".chart-title")
+                .text("Goals per Season Significanty Increased From 1966-1982");
         } else if (value === "high") {
             filteredData = cleanedData.filter(d => d.Season >= 1990 && d.Season <= 2023);
             xDomain = [1990, 2023];
             yDomain = [3500, 8300];
+            svg.select(".chart-title")
+                .text("Most Seasons Approached or Exceeded 6,554 Goals");
         } else if (value === "low") {
             filteredData = cleanedData.filter(d => d.Season >= 1997 && d.Season <= 2005);
             xDomain = [1997, 2005];
             yDomain = [5000, 7600];
+            svg.select(".chart-title")
+                .text("Goals Dip Below 7,000 Goals, Unlike Surrounding Years");
         }
 
         x.domain(xDomain);
@@ -482,7 +489,7 @@ async function drawVis3() {
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("font-weight", "bold")
-        .text("Shooting Percentage");
+        .text("Significant Rise in Shooting Percentage Followed by a Sharp Decline");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
@@ -565,7 +572,7 @@ async function drawVis3() {
         .attr("r", 4)
         .attr("fill", d => {
             if (d.Season >= 1969 && d.Season <= 1981) return "#228B22"; //green
-            if (d.Season >= 1986 && d.Season <= 2015) return "#DC143C"; //red
+            if (d.Season >= 1986 && d.Season <= 2014) return "#DC143C"; //red
             return "#386890";                                           //blue
         })
         .on("mouseover", function (event, d) {
@@ -586,7 +593,7 @@ async function drawVis3() {
                 .attr("r", 4)
                 .attr("fill", d => {
                     if (d.Season >= 1969 && d.Season <= 1981) return "#228B22";
-                    if (d.Season >= 1986 && d.Season <= 2015) return "#DC143C";
+                    if (d.Season >= 1986 && d.Season <= 2014) return "#DC143C";
                     return "#386890";                                          
                 })
             tooltip.style("visibility", "hidden");
@@ -624,7 +631,7 @@ async function drawVis3() {
             xDomain = [1959, 2025];
             yDomain = [8, d3.max(filteredData, d => d.ShootingPercentage)];
             svg.select(".chart-title")
-                .text("Shooting Percentage");
+                .text("Significant Rise in Shooting Percentage Followed by a Sharp Decline");
         } else if (value === "low") {
             filteredData = cleanedData.filter(d => d.Season >= 1990 && d.Season <= 2025);
             xDomain = [1990, 2025];
@@ -662,7 +669,7 @@ async function drawVis3() {
             .attr("r", 4)
             .attr("fill", d => {
                 if (d.Season >= 1969 && d.Season <= 1981) return "#228B22";
-                if (d.Season >= 1986 && d.Season <= 2015) return "#DC143C";
+                if (d.Season >= 1986 && d.Season <= 2014) return "#DC143C";
                 return "#386890";                                           
             })
             .on("mouseover", function (event, d) {
@@ -683,7 +690,7 @@ async function drawVis3() {
                     .attr("r", 4)
                     .attr("fill", d => {
                         if (d.Season >= 1969 && d.Season <= 1981) return "#228B22";
-                        if (d.Season >= 1986 && d.Season <= 2015) return "#DC143C";
+                        if (d.Season >= 1986 && d.Season <= 2014) return "#DC143C";
                         return "#386890";                                           
                     })
                 tooltip.style("visibility", "hidden");
@@ -717,12 +724,13 @@ async function drawVis4() {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     svg.append("text")
+        .attr("class", "chart-title")
         .attr("x", width / 2)
         .attr("y", -margin.top / 2)
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("font-weight", "bold")
-        .text("Save Percentage");
+        .text("Drop in Save Percentages Aligned with Rise in Scoring");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
@@ -855,10 +863,14 @@ async function drawVis4() {
             filteredData = cleanedData.filter(d => d.Season >= 1959 && d.Season <= 2025);
             xDomain = [1959, 2025];
             yDomain = [0.865, d3.max(filteredData, d => d.SavePercentage)];
+            svg.select(".chart-title")
+                .text("Drop in Save Percentages Aligned with Rise in Scoring");
         } else if (value === "low") {
             filteredData = cleanedData.filter(d => d.Season >= 1995 && d.Season <= 2006);
             xDomain = [1995, 2006];
             yDomain = [0.895, d3.max(filteredData, d => d.SavePercentage)];
+            svg.select(".chart-title")
+            .text("Save Percentages Rise During Dead Puck Era");
         }
 
         x.domain(xDomain);
@@ -1057,7 +1069,7 @@ async function drawVis6() {
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("font-weight", "bold")
-        .text("Crackdown on Obstruction Penalties Initally Led to More Powerplays");
+        .text("Crackdown on Obstruction Penalties Initally Led to More Powerplay Opportunities");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
