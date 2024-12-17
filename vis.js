@@ -15,12 +15,13 @@ async function drawVis1() {
         .attr("transform", `translate(${margin.left},${margin.top})`);
     
     svg.append("text")
+        .attr("class", "chart-title")
         .attr("x", width / 2)
         .attr("y", -margin.top / 2)
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("font-weight", "bold")
-        .text("Average Goals Per Game");
+        .text("Average Goals per Game");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
@@ -66,7 +67,7 @@ async function drawVis1() {
         .attr("fill", "black")
         .style("font-size", "14px")
         .style("text-anchor", "middle")
-        .text("Average Goals Per Game");
+        .text("Average Goals per Game");
 
     const line = d3.line()
         .x(d => x(d.Season))
@@ -152,14 +153,20 @@ async function drawVis1() {
             filteredData = cleanedData;
             xDomain = d3.extent(cleanedData, d => d.Season);
             yDomain = [1.2, d3.max(cleanedData, d => d.AverageGoalsPerGame)];
+            svg.select(".chart-title")
+                .text("Average Goals per Game");
         } else if (value === "high") {
             filteredData = cleanedData.filter(d => d.Season >= 1990 && d.Season <= 2023);
             xDomain = [1990, 2023];
             yDomain = [2.5, 3.7];
+            svg.select(".chart-title")
+                .text("Goals per Game Have Declined Since The 1992-1993 Season");
         } else if (value === "low") {
             filteredData = cleanedData.filter(d => d.Season >= 1997 && d.Season <= 2005);
             xDomain = [1997, 2005];
             yDomain = [2.5, 3.2];
+            svg.select(".chart-title")
+                .text("1997–2004: The Lowest Consecutive Goals per Game Scoring Period");
         }
 
         x.domain(xDomain);
@@ -469,6 +476,7 @@ async function drawVis3() {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     svg.append("text")
+        .attr("class", "chart-title")
         .attr("x", width / 2)
         .attr("y", -margin.top / 2)
         .attr("text-anchor", "middle")
@@ -557,7 +565,7 @@ async function drawVis3() {
         .attr("r", 4)
         .attr("fill", d => {
             if (d.Season >= 1969 && d.Season <= 1981) return "#228B22"; //green
-            if (d.Season >= 1986 && d.Season <= 2000) return "#DC143C"; //red
+            if (d.Season >= 1986 && d.Season <= 2015) return "#DC143C"; //red
             return "#386890";                                           //blue
         })
         .on("mouseover", function (event, d) {
@@ -578,7 +586,7 @@ async function drawVis3() {
                 .attr("r", 4)
                 .attr("fill", d => {
                     if (d.Season >= 1969 && d.Season <= 1981) return "#228B22";
-                    if (d.Season >= 1986 && d.Season <= 2000) return "#DC143C";
+                    if (d.Season >= 1986 && d.Season <= 2015) return "#DC143C";
                     return "#386890";                                          
                 })
             tooltip.style("visibility", "hidden");
@@ -615,10 +623,15 @@ async function drawVis3() {
             filteredData = cleanedData.filter(d => d.Season >= 1959 && d.Season <= 2025);
             xDomain = [1959, 2025];
             yDomain = [8, d3.max(filteredData, d => d.ShootingPercentage)];
+            svg.select(".chart-title")
+                .text("Shooting Percentage");
         } else if (value === "low") {
             filteredData = cleanedData.filter(d => d.Season >= 1990 && d.Season <= 2025);
             xDomain = [1990, 2025];
             yDomain = [8, 12.5];
+            svg.select(".chart-title")
+                .text("Shooting Percentage Has Dropped Significantly Since The 1992-93 Season");
+            
         }
 
         x.domain(xDomain);
@@ -649,7 +662,7 @@ async function drawVis3() {
             .attr("r", 4)
             .attr("fill", d => {
                 if (d.Season >= 1969 && d.Season <= 1981) return "#228B22";
-                if (d.Season >= 1986 && d.Season <= 2000) return "#DC143C";
+                if (d.Season >= 1986 && d.Season <= 2015) return "#DC143C";
                 return "#386890";                                           
             })
             .on("mouseover", function (event, d) {
@@ -670,7 +683,7 @@ async function drawVis3() {
                     .attr("r", 4)
                     .attr("fill", d => {
                         if (d.Season >= 1969 && d.Season <= 1981) return "#228B22";
-                        if (d.Season >= 1986 && d.Season <= 2000) return "#DC143C";
+                        if (d.Season >= 1986 && d.Season <= 2015) return "#DC143C";
                         return "#386890";                                           
                     })
                 tooltip.style("visibility", "hidden");
@@ -929,7 +942,7 @@ svg.append("text")
     .attr("text-anchor", "middle")
     .style("font-size", "16px")
     .style("font-weight", "bold")
-    .text("Total Number of Teams from 1979-2006");
+    .text("Influx of New Teams Contributed to the Dead Puck Era");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
@@ -1044,7 +1057,7 @@ async function drawVis6() {
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("font-weight", "bold")
-        .text("Powerplay Opportunities from the 1990-2005 Seasons");
+        .text("Crackdown on Obstruction Penalties Initally Led to More Powerplays");
 
     const data = await d3.csv("datasets/LeagueTotals.csv");
 
