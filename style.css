@@ -220,28 +220,7 @@ footer {
 }
 
 /* media queries */
-
-@media (max-width: 1842px) {
-    
-    .row {
-        flex-direction: column;
-    }
-
-    .left-column, .right-column {
-        flex: none;
-    }
-
-    .left-column {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-
-    .title {
-        padding-right: 0;
-    }
-}
-
-@media (max-width: 1260px) {
+@media (max-width: 1280px) {
     
     nav{
         flex-direction: column;
@@ -282,6 +261,23 @@ footer {
 
     .about-list {
         text-align: left;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .left-column, .right-column {
+        flex: none;
+    }
+
+    .left-column {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .title {
+        padding-right: 0;
     }
 
 }
