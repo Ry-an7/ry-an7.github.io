@@ -115,10 +115,13 @@ async function drawVis1() {
                 .style("top", (event.pageY - 10) + "px")
                 .style("left", (event.pageX + 10) + "px");
         })
-        .on("mouseout", function () {
+        .on("mouseout", function (event, d) {
             d3.select(this)
                 .attr("r", 4)
-                .attr("fill", "#386890");
+                .attr("fill", d => {
+                    const value = d3.select('input[name="season-vis1"]:checked').node().value;
+                    return value === "high" && d.Season >= 1992 && d.Season <= 1999 ? "#DC143C" : "#386890";
+                });
             tooltip.style("visibility", "hidden");
         });
 
@@ -190,42 +193,22 @@ async function drawVis1() {
 
         svg.selectAll(".dot")
             .data(filteredData)
-            .join("circle")
-            .attr("class", "dot")
+            .join(
+                enter => enter.append("circle")
+                    .attr("class", "dot")
+                    .attr("cx", d => x(d.Season))
+                    .attr("cy", d => y(d.AverageGoalsPerGame))
+                    .attr("r", 4)
+                    .attr("fill", d => value === "high" && d.Season >= 1992 && d.Season <= 1999 ? "#DC143C" : "#386890"),
+                update => update,
+                exit => exit.remove()
+            )
+            .transition()
+            .duration(1000)
             .attr("cx", d => x(d.Season))
             .attr("cy", d => y(d.AverageGoalsPerGame))
-            .attr("r", 4)
-            .attr("fill", d => {
-                if (value === "high" && d.Season >= 1992 && d.Season <= 1999) {
-                    return "#DC143C";
-                }
-                return "#386890";
-            })
-            .on("mouseover", function (event, d) {
-                d3.select(this)
-                    .attr("r", 5)
-                    .attr("fill", "orange");
-                tooltip
-                    .style("visibility", "visible")
-                    .html(`<strong>Season:</strong> ${d.FullSeason}<br><strong>Goals per Game:</strong> ${d.AverageGoalsPerGame.toFixed(2)}`);
-            })
-            .on("mousemove", function (event) {
-                tooltip
-                    .style("top", (event.pageY - 10) + "px")
-                    .style("left", (event.pageX + 10) + "px");
-            })
-            .on("mouseout", function () {
-                d3.select(this)
-                    .attr("r", 4)
-                    .attr("fill", d => {
-                        if (value === "high" && d.Season >= 1992 && d.Season <= 1999) {
-                            return "#DC143C";
-                        }
-                        return "#386890";
-                    })
-                tooltip.style("visibility", "hidden");
-            });
-
+            .attr("fill", d => value === "high" && d.Season >= 1992 && d.Season <= 1999 ? "#DC143C" : "#386890");
+        
         avgGoals = d3.mean(filteredData, d => d.AverageGoalsPerGame);
         avgLine
             .transition()
@@ -429,31 +412,39 @@ async function drawVis2() {
 
         svg.selectAll(".dot")
             .data(filteredData)
-            .join("circle")
-            .attr("class", "dot")
-            .attr("cx", d => x(d.Season))
-            .attr("cy", d => y(d.SeasonGoals))
-            .attr("r", 4)
-            .attr("fill", d => (d.Season >= 1966 && d.Season <= 1982 ? "#228B22" : "#386890"))
-            .on("mouseover", function (event, d) {
-                d3.select(this)
-                    .attr("r", 5)
-                    .attr("fill", "orange");
-                tooltip
-                    .style("visibility", "visible")
-                    .html(`<strong>Season:</strong> ${d.FullSeason}<br><strong>Total Goals:</strong> ${d.SeasonGoals.toFixed(2)}`);
-            })
-            .on("mousemove", function (event) {
-                tooltip
-                    .style("top", (event.pageY - 10) + "px")
-                    .style("left", (event.pageX + 10) + "px");
-            })
-            .on("mouseout", function () {
-                d3.select(this)
+            .join(
+                enter => enter.append("circle")
+                    .attr("class", "dot")
+                    .attr("cx", d => x(d.Season))
+                    .attr("cy", d => y(d.SeasonGoals))
                     .attr("r", 4)
                     .attr("fill", d => (d.Season >= 1966 && d.Season <= 1982 ? "#228B22" : "#386890"))
-                tooltip.style("visibility", "hidden");
-            });
+                    .on("mouseover", function (event, d) {
+                        d3.select(this)
+                            .attr("r", 5)
+                            .attr("fill", "orange");
+                        tooltip
+                            .style("visibility", "visible")
+                            .html(`<strong>Season:</strong> ${d.FullSeason}<br><strong>Total Goals:</strong> ${d.SeasonGoals.toFixed(2)}`);
+                    })
+                    .on("mousemove", function (event) {
+                        tooltip
+                            .style("top", (event.pageY - 10) + "px")
+                            .style("left", (event.pageX + 10) + "px");
+                    })
+                    .on("mouseout", function () {
+                        d3.select(this)
+                            .attr("r", 4)
+                            .attr("fill", d => (d.Season >= 1966 && d.Season <= 1982 ? "#228B22" : "#386890"));
+                        tooltip.style("visibility", "hidden");
+                    }),
+                update => update
+                    .transition()
+                    .duration(1000)
+                    .attr("cx", d => x(d.Season))
+                    .attr("cy", d => y(d.SeasonGoals)),
+                exit => exit.remove()
+            );
 
         avgGoals = d3.mean(filteredData, d => d.SeasonGoals);
         avgLine
